@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Xiang Li">
+  <meta name="keywords" content="">
+  <title>[论文阅读01]Neurosurgeon：Collaborative Intelligence Between the Cloud and Mobile Edge - 李翔的个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>记录学习的点滴</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-16 15:04" pubdate>
+        2019年12月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      43
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">[论文阅读01]Neurosurgeon：Collaborative Intelligence Between the Cloud and Mobile Edge</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <blockquote>
+<p><a target="_blank" rel="noopener" href="https://web.eecs.umich.edu/~jahausw/publications/kang2017neurosurgeon.pdf">《Neurosurgeon: Collaborative Intelligence Between the Cloud and Mobile Edge》</a></p>
+<p><strong>Neurosurgeon：一种云和移动边缘之间的联合智能系统</strong></p>
+<p>论文出处：2017 <strong>ASPLO</strong> (Architectural Support for Programming Languages and Operating Systems)，是计算机体系结构的顶级学术会议。</p>
+</blockquote>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>目前越来越多的智能应用程序，使用语音和图像类型的数据作为输入。比如智能个人助理（Apple Siri、Microsoft Cortana），智能家居和可穿戴设备、导航应用等，人们与移动设备交互模式正在发生迅速改变，预计将取代传统的基于文本的输入形式。</p>
+<p>这些应用的实现依赖准确且高度复杂的机器学习技术，其中最常见的是深度神经网络（DNN）。早期的工作认为：传统的移动设备不能支持这种大量的计算，以满足合理的延迟和能量消耗。Web服务提供商用于智能应用程序的现行方法，是把用户的移动设备生成的查询发送到云进行处理，在远端的高性能云服务器上托管所有计算。然而利用这种方法，大量数据（例如，图像，视频和音频）经由无线网络和回程链路上载到服务器，导致高等待时间和能量成本。</p>
+<p>庆幸的是，现代移动硬件的性能和能效通过强大的移动SoC集成继续得到改善。受此启发，本文的作者重新审视了移动和云之间智能应用程序的计算细分。即在运行以神经网络为支撑的应用程序任务时，将计算任务拆解为server-side和edge-side两部分，其中server-side在数据中心的服务器里执行，edge-side则在终端设备上执行。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/1.PNG" srcset="/img/loading.gif"></p>
+<p>这项工作要处理的主要问题包括：</p>
+<ol>
+<li>在当今的移动平台上执行大规模智能工作负载的可行性如何？</li>
+<li>在何种情况下，通过无线网络传输语音和图像数据的成本过高，而无法发挥云处理的合理性？</li>
+<li>在为需要大量计算的智能应用程序提供处理支持方面，移动边缘应当扮演什么角色？</li>
+</ol>
+<p>作者使用8个基于DNN的智能应用程序进行试验，这些应用程序涵盖了视觉，语音和自然语言领域。作者发现：终端设备与数据中心的网络连接带宽，设备的计算能力，DNN模型的结构都会影响到计算任务的拆解方式。拆解的粒度是神经网络的layer。这种任务划分策略的考虑，可以影响端到端延迟和移动能源效率。这也可以被认为是一个带约束的优化问题，优化目标是对计算任务在两个计算结点（终端和服务器端）之间进行拆分，约束则包括网络结构、网络带宽以及设备的计算能力。同时，将计算推到云之外的移动设备上，也提高了数据中心的吞吐量，允许给定的数据中心支持更多的用户查询，为移动设备和云系统创造了双赢的局面。</p>
+<p>作者为此设计了一个轻量级动态调度系统：Neurosurgeon。它是一个跨越云和移动平台的系统，可自动识别DNN中的理想分区点，并协调移动设备和数据中心之间的计算分配。针对8个DNN应用程序的评估表明，使用Neurosurgeon，平均可将端到端延迟提高3.1倍，将移动能耗降低59.5％，并将数据中心吞吐量提高1.5倍。</p>
+<h1 id="2-Background"><a href="#2-Background" class="headerlink" title="2. Background"></a>2. Background</h1><p>本部分，主要是对深度神经网络（DNN）的概述，作者描述计算机视觉，语音和自然语言处理等应用程序，如何利用DNN作为其核心机器学习算法。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/2.PNG" srcset="/img/loading.gif"></p>
+<h1 id="3-Cloud-only-Processing"><a href="#3-Cloud-only-Processing" class="headerlink" title="3. Cloud-only Processing"></a>3. Cloud-only Processing</h1><h2 id="Experimental-setup"><a href="#Experimental-setup" class="headerlink" title="Experimental setup"></a>Experimental setup</h2><p>介绍了本文实验中，移动端和服务器端采用的硬件平台：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/3.PNG" srcset="/img/loading.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/4.PNG" srcset="/img/loading.gif"></p>
+<p>以及采用的DNN网络的搭建框架：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/5.PNG" srcset="/img/loading.gif" alt="5"></p>
+<h2 id="Examining-the-Mobile-Edge"><a href="#Examining-the-Mobile-Edge" class="headerlink" title="Examining the Mobile Edge"></a>Examining the Mobile Edge</h2><p>本文作者以经典的AlexNet网络（一个典型的用于图像分类的卷积神经网络）作为示例，网络以152KB图像作为输入。在通信延迟、计算延迟、端到端延迟和能耗方面进行对比。对于无线通信，使用TestMyNet软件在多个移动设备上测量3G，LTE和Wi-Fi的带宽。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/6.PNG" srcset="/img/loading.gif"></p>
+<p>先看时延这一指标：</p>
+<ul>
+<li><strong>通信延迟</strong> ：图3a显示了通过3G，LTE和Wi-Fi上传输入图像的延迟。表明网络类型对于实现将数据传送至云端的低延迟至关重要。</li>
+<li><strong>计算延迟</strong>：图3b显示了在移动CPU，GPU和云GPU上运行AlexNet网络的计算延迟。可以看出在移动设备上运行神经网络的性能还是和云端服务器存在差距；移动设备上GPU处理要强过CPU处理；注意到，即便移动CPUs上运行AlexNet处理图像的时间，仍然比通过3G上传输数据输入快2.3倍。</li>
+<li><strong>端到端延迟</strong> ：图3c显示了仅在云端处理和仅在移动设备上处理，两种方式所需的总延迟，每个条形顶部的注释是用于计算所花费的端到端延迟的占比。<ul>
+<li>使用云服务器进行全部的计算时，结果表明计算所消耗的时间仅占全部时间的6%，而剩余的94%都消耗在数据传输上。</li>
+<li>只要移动设备拥有可用的GPU，在本地GPU上实施所有的计算操作能够带来最佳的体验（总延迟时间最短）；同时，在LTE和Wi-Fi网络条件下，传输至云端处理要比仅用移动设备CPU进行全部的计算操作要更好（系统延迟时间更少）。</li>
+</ul>
+</li>
+<li><strong>能耗</strong>：如果移动设备连接的是Wi-Fi网络，最低的电量损耗方案是发送相应的数据到云服务器并让其进行全部的计算操作。但如果连接的是3G或LTE网络，并且该移动设备有可用的GPU，那么在本地GPU上实施全部的计算操作这一方案所导致的电量消耗，会比数据传输且在云服务器上实施全部的计算操作这一方案更低。</li>
+</ul>
+<h1 id="4-Fine-grained-Computation-Partitioning-细粒度计算分区"><a href="#4-Fine-grained-Computation-Partitioning-细粒度计算分区" class="headerlink" title="4. Fine-grained Computation Partitioning 细粒度计算分区"></a>4. Fine-grained Computation Partitioning 细粒度计算分区</h1><p>上一章所有计算都实施在云服务器或移动设备上，这两种“相对极端”的方法之间，或者说在数据传输和实施计算两者之间是否存在一种折中。显然，DNN分层级的网络结构，提供适合于分区计算的抽象概念。</p>
+<h2 id="Layer-Taxonomy"><a href="#Layer-Taxonomy" class="headerlink" title="Layer Taxonomy"></a>Layer Taxonomy</h2><p>这一小节主要是对目前DNN中存在的各种类型的层和其功能的简要介绍，涉及深度学习有关的知识。包括：Fully-connected Layer、Convolution &amp; Local Layer、Pooling Layer、Activation Layer、normalization layer、softmax layer、argmax layer、dropout layer等。</p>
+<h2 id="Characterizing-Layers-in-AlexNet"><a href="#Characterizing-Layers-in-AlexNet" class="headerlink" title="Characterizing Layers in AlexNet"></a>Characterizing Layers in AlexNet</h2><p>首先研究AlexNet中每个层的数据和计算特征（在本节及后续部分中，在移动和服务器平台中均使用GPU），将得到如下的统计图。（浅色柱）显示了移动GPU上按顺序执行AlexNet每个层的延迟，（深色柱）显示了每层输出数据的大小，这也是下一层的输入。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/7.PNG" srcset="/img/loading.gif"></p>
+<ul>
+<li><p>每一层都有不同的计算时间和数据产生开销。</p>
+</li>
+<li><p>卷积（conv）和全连接层（fc）是最耗时的层，占总执行时间的90％以上。</p>
+</li>
+<li><p>中间的卷积层（conv3和conv4）比早期的卷积层（conv1和conv2）花费更长的时间。这是因为后面的卷积层会使用更多数量的滤波器以提取更强的特征，从而增加计算量。</p>
+</li>
+<li><p>AlexNet的前几层会生成大量输出数据，而池化层（pool）会将数据数量锐减，数据数量通过激活层保持不变（relu1-relu5），最后的几层（位于深层的全连接层，softmax，argmax）会逐渐减小数据大小直到最后将数据减少为一个分类标签。</p>
+</li>
+</ul>
+<p>对于AlexNet这种结构的DNN来说，位于网络前端的层产生较大的数据量，而后端的层则带来了较大的计算开销。</p>
+<h2 id="Layer-granularity-Computation-Partitioning-层粒度计算分区"><a href="#Layer-granularity-Computation-Partitioning-层粒度计算分区" class="headerlink" title="Layer-granularity Computation Partitioning 层粒度计算分区"></a>Layer-granularity Computation Partitioning 层粒度计算分区</h2><p>下面研究如果各个网络层分割开会发生什么呢？（即在移动设备上处理模型的前n层，再把得到的第n层的输出结果传输至云服务器上进行之后的计算，最后再将输出结果传输至移动设备上）在本节中，使用Wi-Fi作为无线网络配置。</p>
+<p>在下图中的每个条形，意味着在这一层之后进行分区的端到端延迟和移动能量消耗。那么，最左边的条表示发送原始输入进行云端处理；最右边的条是在移动设备上本地执行整个DNN。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/8.PNG" srcset="/img/loading.gif" alt="8"></p>
+<ul>
+<li><strong>延迟分区</strong> ： 如果在前端进行分区，则数据传输主导端到端延迟，这与之前观察到的数据大小在DNN早期阶段的变化趋势是一致的。在后端进行分区可以提供更好的性能，这样可以最大限度地减少数据传输开销，同时后端网络层需要大量的计算，可以利用功能强大的云端服务器执行。在AlexNet使用移动GPU和Wi-Fi的情况下，在pool5和fc6层之间的分区实现了最低延迟，比全部传送到云处理上提高了2.0倍 。</li>
+<li><strong>能量分区</strong> –：与延迟类似，由于无线数据传输的高能源成本，转移仅用于云的处理的输入并不是最节能的方法。 如图6b所示，DNN中间的分区实现了最佳的移动能耗，比纯云方法节能18％。</li>
+</ul>
+<h2 id="Generalizing-to-More-DNNs"><a href="#Generalizing-to-More-DNNs" class="headerlink" title="Generalizing to More DNNs"></a>Generalizing to More DNNs</h2><p>作者进一步将实验扩展到7个更智能的应用程序（7个不同结构的DNN），以研究它们的数据和计算特性及其对计算分区的影响。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/9.PNG" srcset="/img/loading.gif" alt="9"></p>
+<p>对于应用于计算机视觉 (Computer Vision, CV) 领域的具有卷积层的模型，由于卷积层后的数据大小增加，通常最佳的分割点在模型的中部；而对于通常只有全连接层和激活层的网络模型（主要应用在语音识别（Automatic Speech Recognition, ASR）和自然语言处理领域(Natural Language Process, NLP)）而言，在模型的开始部分或者结尾部分进行分割往往更好一点。可以看出，最佳分割点随着模型的不同而变化着。</p>
+<p>基于不同DNN结构的应用程序的最佳分区点的变化表明：需要一种系统能够智能地选择划分DNN的最佳点以优化端到端延迟或移动设备能量消耗，并利用云服务器和设备GPU分配相应的计算操作。这也引出了下一章这篇文章的核心工作。</p>
+<h1 id="5-Neurosurgeon"><a href="#5-Neurosurgeon" class="headerlink" title="5. Neurosurgeon"></a>5. Neurosurgeon</h1><p>对于一个DNN模型，影响最佳的分割点位置的因素主要有两种：一种是静态的因素，例如模型的结构；一种是动态的因素，即使对于相同的DNN架构，诸如无线网络状态、数据中心负载和设备剩余可用的电量等的动态因素也会影响最佳分区点。</p>
+<p>基于以上的因素，作者为此提出了智能DNN分区引擎Neurosurgeon的设计，由部署阶段和运行时系统组成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/10.PNG" srcset="/img/loading.gif" alt="10"></p>
+<ul>
+<li><strong>部署阶段</strong>：描述移动设备和服务器，以生成DNN常用的各种层类型的性能预测模型，需要注意的是这和应用程序无关的，只需要针对给定的移动和服务器平台进行一次。这组预测模型存储在移动设备上，随后用于预测每层的延迟和能量成本</li>
+<li><strong>运行阶段</strong> ： 在移动设备上执行基于DNN的智能应用程序期间，Neurosuron会动态确定DNN的最佳分区点。 步骤如下：<ol>
+<li>分析并提取DNN架构的图层类型和配置；</li>
+<li>系统使用已存的层性能预测模型来估计在移动和云上执行每一层的延迟和能量消耗；</li>
+<li>通过这些预测，结合当前的无线连接带宽和数据中心负载水平，Neurosurgeon选择最佳分区点，优化最佳端到端延迟或最佳移动能耗；</li>
+<li>执行DNN，在移动和云之间进行分区工作。</li>
+</ol>
+</li>
+</ul>
+<h1 id="6-Evaluation"><a href="#6-Evaluation" class="headerlink" title="6. Evaluation"></a>6. Evaluation</h1><p>实验结果表明，相比于目前使用仅使用云服务器的方法，Neurosurgeon能够将应用的延迟时间平均降低了3.1倍（最高能达到40.7倍）。</p>
+<p>在电量消耗方面，相比于现有方法，Neurosurgeon能够使得移动设备的电量消耗量平均降低至59.5%，最高能降低至94.7%。</p>
+<p>下图展示了Neurosurgeon随着网络环境的变化（即LTE带宽变化）自适应进行分割和优化的结果（下图中的蓝色实线部分），可以看出比起现有方法（下图中的红色虚线部分）能够大幅度地降低延迟时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/11.PNG" srcset="/img/loading.gif"></p>
+<p>Neurosurgeon也会与云服务器保持周期性的通讯，以获得其数据中心的负载情况。当服务器的数据中心负载较大时，它会减少往服务器上传输的数据量而增加移动设备本地的计算量。总之，Neurosurgeon能够根据服务器的负载情况作出适当的调整已达到最低的系统延迟时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/12.PNG" srcset="/img/loading.gif" alt="12"></p>
+<p>随着连接网络质量的变差，Neurosurgeon会让移动设备承担更多的计算量，此时云服务器上数据中心的吞吐量将增加：较现有方法，连接LTE网络的情况下数据中心的吞吐量增加至1.43倍，而3G网络条件下则增加至2.36倍。此外还可以观察到，随着带GPU的移动设备百分比增加，Neurosurgeon增加了从云端到移动设备端的计算，导致更高的数据中心吞吐量改进。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/13.PNG" srcset="/img/loading.gif"></p>
+<h1 id="个人体会"><a href="#个人体会" class="headerlink" title="个人体会"></a>个人体会</h1><p>这个文章更多是一个偏实验性质的论文，但有着很好的指导意义。</p>
+<ol>
+<li><p>不少和MEC相关的综述文章，对于可分割计算任务，给出的是如下图这样很抽象的模型描述，这篇文章把计算任务具体到以DNN为核心的有关运算，能帮助理解这些抽象模型，实际上这也是边缘应用中非常普遍的计算任务之一（许多需要边缘计算的领域，需要运行神经网络为基础的应用程序）。</p>
+</li>
+<li><p>作者给出了详细的实验设备、DNN框架、经典DNN模型的指导，应该来讲这篇论文的可复现的程度是很高的</p>
+</li>
+<li><p>作者指出这种DNN为核心的计算任务，应该在移动端和边缘服务器上联合计算。对于计算量的划分，会受到DNN模型结构这一静态因素，和诸如无线网络状态、数据中心负载和设备剩余可用的电量等动态因素影响。对于动态因素在本文里多是以实验仿真去评估，作者实际并没有做很深入的数学上的分析。</p>
+</li>
+<li><p>这类DNN为核心的计算任务，尤其是其中视觉有关的DNN模型。在工业场景下应该会存在更大的应用，如：车间摄像头实时监控流水线的设备运作画面、无人机航拍城市交通等，并通过无线网络上传画面配合边缘服务器联合计算。这类工业场景中的无线网络不能总保持良好状态，会影响计算结果的实时性（论文中指端到端时延，是否可以考虑引入信息年龄AoI的概念？）</p>
+</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献阅读</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/">边缘计算</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/02/24/%E6%97%A0%E7%BA%BF%E4%BF%A1%E9%81%93%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">理解信道衰落、相干带宽、相干时间</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/11/12/%E3%80%8ACSAPP%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/">
+                        <span class="hidden-mobile">《CSAPP》读书笔记（2）：信息的表示和处理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "[论文阅读01]Neurosurgeon：Collaborative Intelligence Between the Cloud and Mobile Edge&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

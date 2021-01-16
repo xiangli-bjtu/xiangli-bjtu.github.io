@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Xiang Li">
+  <meta name="keywords" content="">
+  <title>David Silver 强化学习教程（1）：强化学习简介 - 李翔的个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>记录学习的点滴</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-07 11:44" pubdate>
+        2020年5月7日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">David Silver 强化学习教程（1）：强化学习简介</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="写在最前面"><a href="#写在最前面" class="headerlink" title="写在最前面"></a>写在最前面</h1><p>人工智能领域无疑是近些年各个行业争相追捧的热点，我一个原本搞通信的现在也在逐渐学习AI的知识，毕竟现在通信的理论基础已经发展遇到瓶颈了，除非再出现一个祖师爷香农级别的人物引领一波理论革命。上一阶段的人工智能，按照个人理解可以概括建立在大数据基础上，让机器从带有标签的大量数据中提取特征，学习模式来完成预测和分类任务。最常见应用就包括计算机视觉、自然语言处理，这两个领域机器已经能做到达到甚至超越人类的性能，而无论公司和从业者都多到离谱，无疑已是一片红海。</p>
+<p>另一类人工智能的分支，以强化学习为代表（当然这里头也涉及到多种技术的融合）。监督式的学习毕竟以人类标记作为准测，机器的性能天花板不可能超过人类。而强化学习才是真正能赋予了机器认知和意识的技术，实现真正意义上的“强人工智能”。以谷歌DeepMind团队开发的AlphaGo系统在2016年和2017年先后击败世界围棋高手李世石和柯洁为标志事件，强化学习算法引起了各个领域的广泛关注，并且取得了不少的研究成果。</p>
+<p>对于各行业从业者，学会强化学习的知识并且用于自己的研究领域无疑是一个迫切的需求。而早在2015年作为领导AlphaGo项目的David Silver就在 UCL 开设了课程并把视频发布到了YouTube上，较为系统地介绍了强化学习的各种思想、实现算法。本系列文章是对于David 所授课程的学习笔记，力求尽量还原教学内容并穿插自己的理解。b站有配上中文字幕得教学视频。<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kb411i7KG?from=search&seid=4606460319322526728">b站链接</a></p>
+<p>本笔记的撰写也参考了以下的文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/reinforce">David Silver 强化学习公开课中文讲解及实践</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50478310">David Silver 增强学习——笔记合集</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/9385570.html">强化学习知识整理</a></li>
+</ul>
+<p>关于参考书籍，David在本课程建议的参考书籍主要有两本：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf">《An Introduction to Reinforcement Learning》</a>, （被誉为强化学习教父的Richard S. Sutton编写的经典书籍，也是David Silver的老师，这门课程基本按照这本书的逻辑来），这本书有人翻译成了中文：<a target="_blank" rel="noopener" href="https://rl.qiwihui.com/zh_CN/latest/index.html">https://rl.qiwihui.com/zh_CN/latest/index.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf">《Algorithms for Reinforcement Learning》</a>，（全书 200+页，较为精简，重视数学逻辑和严格推导，适合喜欢啃公式的同学）</li>
+</ul>
+<h1 id="强化学习简介"><a href="#强化学习简介" class="headerlink" title="强化学习简介"></a>强化学习简介</h1><p><strong>强化学习框架</strong></p>
+<p>下图简单阐述了强化学习的基本框架：智能体（Agent，即图中的大脑）需要通过和环境交互学习解决某项任务。首先智能体通过观察环境（observation）并采取一个动作（action），动作会对环境产生影响从而使环境发生改变，同时环境也会对行为进行反馈一个即时奖励（reward）。智能体重复该过程与环境不断地交互得到很多数据记录，并根据设定的学习算法使用数据改善自身的动作策略。在经过若干次学习后，智能体能最终学会完成相应任务的最优策略（policy）。</p>
+<div align="center">
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.1.JPG" srcset="/img/loading.gif" style="zoom:67%;" />
+</div>
+
+<p><strong>强化学习与其他机器学习的联系</strong></p>
+<p>如果你对常见的机器学习方法（machine learning）有所涉猎，根据上面对强化学习的描述，可以看出相比于其他的机器学习算法，强化学习具备以下的特点：</p>
+<ul>
+<li>不存在监督者，而是通过和环境交互来获得奖励</li>
+<li>反馈可能存在延迟，当前步骤采取动作带来的效果并不会立即见效（所以一般在实际操作中会设定一个强化学习过程的持续时间）</li>
+<li>数据非独立同分布的：我们得到的决策过程，我们获取的每一次数据都不是独立同分布(i.i.d)的，他是一个有先后顺序的数据序列</li>
+<li>动作对之后的结果能够产生影响：在决策过程中存在先后顺序，当前动作的不同导致下一次得到完全不同的数据</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.2.PNG" srcset="/img/loading.gif" style="zoom:67%;" />
+
+<p>下面这张图说明了强化学习和其他机器学习方法之间的关系：</p>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.15.PNG" srcset="/img/loading.gif" style="zoom:67%;" />
+
+<h1 id="强化学习中的基本概念"><a href="#强化学习中的基本概念" class="headerlink" title="强化学习中的基本概念"></a>强化学习中的基本概念</h1><p>强化学习入门困难的一点在于其术语非常多且容易混淆，有必要对这些基本概念做详细解释</p>
+<h2 id="Reward"><a href="#Reward" class="headerlink" title="Reward"></a>Reward</h2><p>奖励是环境对智能体采取动作做出的反馈，是一个<strong>标量</strong>；它反映了每一步决策的好坏情况；智能体的目标就是最大化累积奖励。</p>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.3.JPG" srcset="/img/loading.gif" style="zoom: 80%;" />
+
+<p>强化学习本质上是一个<strong>序贯决策过程</strong>，对于任何一个强化学习任务，需要进行以下的考量</p>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.4.PNG" srcset="/img/loading.gif" style="zoom:75%;" />
+
+<h2 id="Agent-and-Environment"><a href="#Agent-and-Environment" class="headerlink" title="Agent and Environment"></a>Agent and Environment</h2><p>智能体和环境的交互过程如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.5.PNG" srcset="/img/loading.gif" style="zoom:67%;" />
+
+<ul>
+<li>agent观测环境（observation）并获得环境对其以往动作的反馈（reward），以此为输入，根据内置的算法进而采取对应的行动（action）</li>
+<li>observation是外部环境产生的，可被agent观察到的情况，<strong>不一定等同于environment的内部运行机制</strong>，实际上很多情况下我们也不需要详细知道环境是怎么运作的</li>
+<li>每一个action产生之后会对environment产生作用，影响到下一步骤观测的observation，并且反馈agent相应的reward</li>
+</ul>
+<h2 id="History-and-State"><a href="#History-and-State" class="headerlink" title="History and State"></a>History and State</h2><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.6.PNG" srcset="/img/loading.gif" style="zoom: 80%;" />
+
+<ul>
+<li>历史是截至时间t为止所能观察到的变量信息，是一个包含过去观测、动作、奖励的序列</li>
+<li>状态是用来规划将来的已有信息，可以看作<strong>是对历史的总结，因此可以被视作关于history的函数</strong>。State相对于history而言最大的好处在于他的信息量很少，实际上，我们也不需要根据所有的历史信息来决策下一步该采取怎样的action（在之后的马尔科夫状态中会提到历史信息的无记忆性）</li>
+</ul>
+<p><strong>3种不同的State</strong></p>
+<ol>
+<li><p><strong>Environment State</strong> $S_t^e$：是真正的环境所包含的信息，一般对agent并不完全可见。实际上，个体有时候也不需要知道环境状态的全部细节，一是因为agent是根据环境反馈的观测/奖励来修改自己的策略；二是即使环境状态对个体完全可见的，这些信息中也可能包含着一些无关成分；</p>
+</li>
+<li><p><strong>Agent State</strong> $S_t^a$：包括个体可以使用的，用来决定未来动作的所有信息。我个人理解是Agent自己对Environment State的解读与翻译，它可能不完整，但我们的确是指望着这些信息来运行强化学习算法的决策</p>
+</li>
+<li><p><strong>Information State</strong>：又称Markov状态，这个概念更多是强调状态的某种性质，与前面的两种State并不形成并列关系。如果现在的状态已经包含了预测未来所有的有用的信息，换句话讲可以丢弃掉历史信息中跟决策影响无关的成分。则它具有马尔科夫性，满足如下定义：</p>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.7.PNG" srcset="/img/loading.gif" style="zoom:75%;" />
+
+</li>
+</ol>
+<h2 id="Observation-and-Environment"><a href="#Observation-and-Environment" class="headerlink" title="Observation and Environment"></a>Observation and Environment</h2><p>环境可以分为两种：</p>
+<p><strong>1. Fully Observable Environments</strong></p>
+<p>完全可观察环境下，agent能够直接观察到environment state，即满足图中的等式关系。这是一个很理想化的情况，现实中很多复杂问题是不具备这个条件的。同时根据定义，此时的环境是一个<strong>MDP问题：Markov decision process</strong>。也是强化学习最核心的问题。</p>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.8.PNG" srcset="/img/loading.gif" style="zoom:75%;" />
+
+<p><strong>2. Partially Observable Environments</strong></p>
+<p>部分可观察环境中，Observation state 不等于 environment state，我们只能看到部分信息，或者只能看到一些现象，这也是大多数强化学习问题的场景。这类问题被称为<strong>POMDP问题：partially observable Markov decision process</strong>。所以此时想要解决问题的话Agent必须自己对环境进行解读，自己去探索。对于这类问题David指出一般有以下的解决办法：</p>
+<ul>
+<li>记住所有的历史状态</li>
+<li>使用贝叶斯概率，推导出产生当前环境状态的概率，为此我们需要记录所有环境状态的概率值</li>
+<li>使用递归神经网络，将最近的状态和观测进行组合来推演</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.9.PNG" srcset="/img/loading.gif"></p>
+<h2 id="Agent的组成要素"><a href="#Agent的组成要素" class="headerlink" title="Agent的组成要素"></a>Agent的组成要素</h2><p>Agent涉及到三个组成要素：策略（Policy），价值函数（Value Function）和模型（Model），但要注意这三要素不一定要同时具备。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.10.PNG" srcset="/img/loading.gif"></p>
+<p><strong>1. 策略 Policy</strong></p>
+<p>策略是决定个体行为的机制。是<strong>从状态到动作的一个映射</strong>。有具体两种表现形式：</p>
+<ul>
+<li><p>确定性的（Deterministic）：在某一特定状态确定对应着某一个行为</p>
+</li>
+<li><p>随机的（Stochastic）：在某一状态下，对应不同行动有不同的概率。随机性的行为更具鲁棒性，因为在一些对抗类的场景下（下围棋），如果agent采取确定性的策略，很容易被对手猜到并作出对付方案</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.11.PNG" srcset="/img/loading.gif"></p>
+<p><strong>2. 价值函数 Value Function</strong></p>
+<ul>
+<li>agent在学习过程中需要对面临许多不同的状态，因此要预测某个状态下（或在该状态下状态采取某一动作）可能获得未来的reward的期望值。这个期望值是一个关于状态的函数State-Value function（或关于状态和动作的函数：Action-Value function，在之后笔记的第二章会更详细解释）</li>
+<li>价值函数<strong>是建立在采取某一个策略基础上的</strong>，在不同的策略下即便处于同一状态的，所获得价值并不相同</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.12.PNG" srcset="/img/loading.gif"></p>
+<p><strong>模型 Model</strong></p>
+<p>个体对环境的一个建模，相当于agent“脑补”的一个环境。它体现了<strong>个体是如何思考环境运行机制</strong>的（how the agent think what the environment was.），个体希望模型能模拟环境与个体的交互机制。</p>
+<p>模型至少要解决两个问题：一是<strong>预测状态转移概率</strong>：另一项工作是<strong>预测环境的反馈（即时奖励）</strong>：</p>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.13.PNG" srcset="/img/loading.gif" style="zoom:75%;" />
+
+<p>*<em>[注]**：</em>模型并不是构建agent所必需的，很多强化学习算法并不试图（依赖）构建一个模型。模型仅针对agent的组成而言，环境实际运行机制称为*<em>环境动力学(dynamics of environment)**，它唯一明确agent下一个状态和所得的即时奖励。</em></p>
+<p><strong>Agent的分类</strong></p>
+<ol>
+<li>仅基于价值函数的 <strong>Value Based</strong>：在这样的个体中，有对状态的价值估计函数，但是没有直接的策略函数，策略函数由价值函数间接得到。</li>
+<li>仅直接基于策略的 <strong>Policy Based</strong>：这样的个体中行为直接由策略函数产生，个体并不维护一个对各状态价值的估计函数。</li>
+<li>演员-评判家形式 <strong>Actor-Critic</strong>：个体既有价值函数、也有策略函数。两者相互结合解决问题。</li>
+</ol>
+<p>此外，根据个体在解决强化学习问题时是否建立一个对环境动力学的模型，将其分为两大类：</p>
+<ol>
+<li><strong>Model free</strong>: 这类个体并不视图了解环境如何工作，而仅聚焦于价值和/或策略函数。</li>
+<li><strong>Model based</strong>：个体尝试建立一个描述环境运作过程的模型，以此来指导价值或策略函数的更新。</li>
+</ol>
+<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course1.14.PNG" srcset="/img/loading.gif" style="zoom:75%;" />
+
+
+
+<h1 id="强化学习算法中的几组理念"><a href="#强化学习算法中的几组理念" class="headerlink" title="强化学习算法中的几组理念"></a>强化学习算法中的几组理念</h1><h2 id="Learning-amp-Planning"><a href="#Learning-amp-Planning" class="headerlink" title="Learning &amp; Planning"></a>Learning &amp; Planning</h2><ul>
+<li>学习：<strong>环境初始时是未知的</strong>，个体不知道环境的信息，只能通过和环境来互动得知我们的action会造成什么样的改变，逐渐改善其行为策略。</li>
+<li>规划: <strong>环境如何工作对于个体是已知或近似已知的</strong>，个体并不与环境发生实际的交互，而是利用其构建的模型进行计算，在此基础上改善其行为策略。Planning 问题可以使用动态规划来解决，在本系列的第三部分我们会具体谈到这个方法。</li>
+</ul>
+<p>一个常用的强化学习问题解决思路是，先学习环境如何工作，也就是了解环境工作的方式，即学习得到一个模型，然后利用这个模型进行规划。</p>
+<h2 id="Exploration-amp-Exploitation"><a href="#Exploration-amp-Exploitation" class="headerlink" title="Exploration &amp; Exploitation"></a>Exploration &amp; Exploitation</h2><p>强化学习是一个不断试错，然后减少错误率的过程。所以这里存在一个矛盾，当我们存在一个相对比较好的解决方案时，我们应该选择沿用我们的解决方案，还是选择尝试新的未知的路径，这个路径可能有很高的错误率，也可能有更好的解决方案。如何进行两者的平衡，就是Exploration和Exploitation的问题</p>
+<ul>
+<li>Exploration(探索)：倾向于探索环境中新的信息</li>
+<li>Exploitation(利用)：倾向于利用已知的信息来获取最大reward</li>
+</ul>
+<h2 id="Prediction-amp-Control"><a href="#Prediction-amp-Control" class="headerlink" title="Prediction &amp; Control"></a>Prediction &amp; Control</h2><p>在强化学习里，我们经常需要先解决关于预测（prediction）的问题，而后在此基础上解决关于控制（control）的问题。实际上，这两者是递进的关系。</p>
+<ul>
+<li><p>prediction：<strong>给定一个policy</strong>，评价遵循该策略下agent能获得多大的奖励，可以看成是求解在给定策略下的价值函数（value function）的过程。</p>
+</li>
+<li><p>control：<strong>在没有policy的前提下</strong>，直接找出一个好的策略来最大化未来的奖励。</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Reinforcement-Learning/">Reinforcement Learning</a>
+                    
+                      <a class="hover-with-bg" href="/tags/AI/">AI</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/15/David%20Silver%20%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B%EF%BC%882%EF%BC%89%EF%BC%9A%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">David Silver 强化学习教程（2）：马尔可夫决策过程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/02/24/%E6%97%A0%E7%BA%BF%E4%BF%A1%E9%81%93%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">理解信道衰落、相干带宽、相干时间</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "David Silver 强化学习教程（1）：强化学习简介&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
