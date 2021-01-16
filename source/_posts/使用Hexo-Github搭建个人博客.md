@@ -483,8 +483,6 @@ git push
 
 然后就可以在github上看到新建了分支，里面已经有博客的源文件了。
 
-
-
 这样，我们在`source`文件夹中写好一篇markdown文件后，博客的部署分为两步：
 
 1. 当添加新文章或更改配置后，需要将hexo源文件push到分支`hexo-source`进行备份
@@ -492,11 +490,8 @@ git push
 ```text
 git add .  //添加修改内容到本地仓储
 git commit -m 'modify blog'  //提交修改内容到本地仓库
-git push --set-upstream origin hexo-source  //配置push，以方便后期直接git push推送
 git push  //将本地分支和分支下的内容推送到远程
 ```
-
-注意：执行 `git push --set-upstream origin hexo-source` 命令之后，以后修改博客源文件代码之后，直接使用 `git push` 不用再指定分支，就可以把代码 push 到 `hexo-source` 分支上了
 
 2. 接下来执行博客编译将网页静态文件上传:
 
