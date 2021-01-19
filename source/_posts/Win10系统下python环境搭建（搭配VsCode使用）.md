@@ -97,9 +97,83 @@ conda create --name 项目名 python=3.6
 
 # Jupyterlab
 
-https://zhuanlan.zhihu.com/p/154515490
+## 安装
+
+Jupyter源于Ipython Notebook，是使用Python（也有R、Julia、Node等其他语言的内核）进行代码演示、数据分析、可视化、教学的很好的工具.
+
+直接用conda安装，在命令行执行
+
+```text
+conda install -c conda-forge jupyterlab
+```
+
+接着使用`jupyter-lab`或`jupyter lab`命令，然后默认浏览器会自动打开Jupyter Lab。
+
+更多的操作详见：https://zhuanlan.zhihu.com/p/154515490
+
+## 指定kernel
+
+为不同的项目指定python kernel，创建jupyterlab做分析：
+
+```
+conda install ipykernel
+
+# 安装kernel
+ipython kernel install --user --name 虚拟环境名称
+# 查看已安装kernel
+jupyter kernelspec list
+# 删除kernel
+jupyter kernelspec remove 虚拟环境名称
+```
+
+在默认浏览器打开Jupyter Lab的界面，选择：
+
+![](https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/jupyterlab_env.png)
 
 
 
 # 深度学习平台的配置
+
+深度学习需要在电脑上进行GPU上的计算，比如运行TensorFlow或者Pytorch等，首先需要解决的是正确安装CUDA和CUDNN，下面介绍如何在Win10系统上完成以上操作：
+
+## 查看本机的CUDA驱动适配版本
+
+系统具有 NVIDIA 显卡，则往往已经自动安装了 NVIDIA 显卡驱动程序。如未安装，直接访问 [NVIDIA 官方网站](https://www.nvidia.com/Download/index.aspx?lang=en-us) 下载并安装对应型号的最新公版驱动程序即可。
+
+在桌面右键“NVIDIA控制面板”，点击帮助->系统信息->组件。（前提是你的电脑有英伟达的显卡）
+
+<img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/nvidia_control.png" style="zoom:80%;" />
+
+在打开的窗口中，我们可以看到本机目前最高支持的CUDA版本。如果你升级了显卡驱动，将来也可能会支持更高版本。
+
+## 下载和安装CUDA和cuDNN
+
+* CUDA下载页面：https://developer.nvidia.com/cuda-downloads
+
+  如果需要选择CUDA版本，可从这里打开：https://developer.nvidia.com/cuda-toolkit-archive
+
+  CUDA安装完成后打开命令行，执行`nvcc -V` ，成功的话会返回cuda版本号。
+
+  接下来需要在系统环境变量的Path项下添加几个路径，需要添加的默认的安装路径如下：
+
+  ```text
+  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
+  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\libnvvp
+  ```
+
+* 下载cuDNN时必须选择和你安装的CUDA匹配的版本，下载页面：https://developer.nvidia.com/rdp/cudnn-download。下载cuDNN是需要登录英伟达开发者账户的，如果没有的话，需要注册一个并填写问卷，很简单。注册并登录后，即可打开如下页面，选择对应的文件并下载。
+
+  安装cuDNN首先需要解压cuDNN压缩包，可以看到有`bin、include、lib`目录。
+
+  打开 `“C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA”` 目录，找到你安装的版本目录，打开，将cuDNN压缩包内`bin、include、lib`目录下的文件分别复制过去。
+
+## Tensorflow
+
+安装tensorflow是基于Python的，所以我们先创建一个用于tensorflow开发的虚拟环境。
+
+安装tenforflow需要注意各个依赖之间的版本适配，去官网可以查到对应关系：
+
+https://tensorflow.google.cn/install/source_windows#gpu
+
+
 
