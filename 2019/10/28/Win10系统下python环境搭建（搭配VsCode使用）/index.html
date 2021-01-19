@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.8k 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      20
        分钟
     </span>
   
@@ -264,8 +264,44 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
 <p>重启VsCode后终端默认调用的shell就变成了gitbash：</p>
 <p>不过此时还需要一个步骤，在终端首先输入<code>source activate</code>，可以看到此时已经激活了conda，这是还是base环境即默认的Python解释器</p>
 <p>终端输入<code>conda activate 虚拟环境名</code>激活所创建的虚拟环境</p>
-<h1 id="Jupyterlab"><a href="#Jupyterlab" class="headerlink" title="Jupyterlab"></a>Jupyterlab</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/154515490">https://zhuanlan.zhihu.com/p/154515490</a></p>
-<h1 id="深度学习平台的配置"><a href="#深度学习平台的配置" class="headerlink" title="深度学习平台的配置"></a>深度学习平台的配置</h1>
+<h1 id="Jupyterlab"><a href="#Jupyterlab" class="headerlink" title="Jupyterlab"></a>Jupyterlab</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Jupyter源于Ipython Notebook，是使用Python（也有R、Julia、Node等其他语言的内核）进行代码演示、数据分析、可视化、教学的很好的工具.</p>
+<p>直接用conda安装，在命令行执行</p>
+<pre><code class="hljs text">conda install -c conda-forge jupyterlab</code></pre>
+<p>接着使用<code>jupyter-lab</code>或<code>jupyter lab</code>命令，然后默认浏览器会自动打开Jupyter Lab。</p>
+<p>更多的操作详见：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/154515490">https://zhuanlan.zhihu.com/p/154515490</a></p>
+<h2 id="指定kernel"><a href="#指定kernel" class="headerlink" title="指定kernel"></a>指定kernel</h2><p>为不同的项目指定python kernel，创建jupyterlab做分析：</p>
+<pre><code class="hljs mipsasm">conda <span class="hljs-keyword">install </span>ipykernel
+
+<span class="hljs-comment"># 安装kernel</span>
+ipython kernel <span class="hljs-keyword">install </span>--user --name 虚拟环境名称
+<span class="hljs-comment"># 查看已安装kernel</span>
+<span class="hljs-keyword">jupyter </span>kernelspec list
+<span class="hljs-comment"># 删除kernel</span>
+<span class="hljs-keyword">jupyter </span>kernelspec remove 虚拟环境名称</code></pre>
+<p>在默认浏览器打开Jupyter Lab的界面，选择：</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/jupyterlab_env.png" srcset="/img/loading.gif"></p>
+<h1 id="深度学习平台的配置"><a href="#深度学习平台的配置" class="headerlink" title="深度学习平台的配置"></a>深度学习平台的配置</h1><p>深度学习需要在电脑上进行GPU上的计算，比如运行TensorFlow或者Pytorch等，首先需要解决的是正确安装CUDA和CUDNN，下面介绍如何在Win10系统上完成以上操作：</p>
+<h2 id="查看本机的CUDA驱动适配版本"><a href="#查看本机的CUDA驱动适配版本" class="headerlink" title="查看本机的CUDA驱动适配版本"></a>查看本机的CUDA驱动适配版本</h2><p>系统具有 NVIDIA 显卡，则往往已经自动安装了 NVIDIA 显卡驱动程序。如未安装，直接访问 <a target="_blank" rel="noopener" href="https://www.nvidia.com/Download/index.aspx?lang=en-us">NVIDIA 官方网站</a> 下载并安装对应型号的最新公版驱动程序即可。</p>
+<p>在桌面右键“NVIDIA控制面板”，点击帮助-&gt;系统信息-&gt;组件。（前提是你的电脑有英伟达的显卡）</p>
+<img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/nvidia_control.png" srcset="/img/loading.gif" style="zoom:80%;" />
+
+<p>在打开的窗口中，我们可以看到本机目前最高支持的CUDA版本。如果你升级了显卡驱动，将来也可能会支持更高版本。</p>
+<h2 id="下载和安装CUDA和cuDNN"><a href="#下载和安装CUDA和cuDNN" class="headerlink" title="下载和安装CUDA和cuDNN"></a>下载和安装CUDA和cuDNN</h2><ul>
+<li><p>CUDA下载页面：<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></p>
+<p>如果需要选择CUDA版本，可从这里打开：<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">https://developer.nvidia.com/cuda-toolkit-archive</a></p>
+<p>CUDA安装完成后打开命令行，执行<code>nvcc -V</code> ，成功的话会返回cuda版本号。</p>
+<p>接下来需要在系统环境变量的Path项下添加几个路径，需要添加的默认的安装路径如下：</p>
+<pre><code class="hljs text">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\libnvvp</code></pre></li>
+<li><p>下载cuDNN时必须选择和你安装的CUDA匹配的版本，下载页面：<a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-download%E3%80%82%E4%B8%8B%E8%BD%BDcuDNN%E6%98%AF%E9%9C%80%E8%A6%81%E7%99%BB%E5%BD%95%E8%8B%B1%E4%BC%9F%E8%BE%BE%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E6%88%B7%E7%9A%84%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E7%9A%84%E8%AF%9D%EF%BC%8C%E9%9C%80%E8%A6%81%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AA%E5%B9%B6%E5%A1%AB%E5%86%99%E9%97%AE%E5%8D%B7%EF%BC%8C%E5%BE%88%E7%AE%80%E5%8D%95%E3%80%82%E6%B3%A8%E5%86%8C%E5%B9%B6%E7%99%BB%E5%BD%95%E5%90%8E%EF%BC%8C%E5%8D%B3%E5%8F%AF%E6%89%93%E5%BC%80%E5%A6%82%E4%B8%8B%E9%A1%B5%E9%9D%A2%EF%BC%8C%E9%80%89%E6%8B%A9%E5%AF%B9%E5%BA%94%E7%9A%84%E6%96%87%E4%BB%B6%E5%B9%B6%E4%B8%8B%E8%BD%BD%E3%80%82">https://developer.nvidia.com/rdp/cudnn-download。下载cuDNN是需要登录英伟达开发者账户的，如果没有的话，需要注册一个并填写问卷，很简单。注册并登录后，即可打开如下页面，选择对应的文件并下载。</a></p>
+<p>安装cuDNN首先需要解压cuDNN压缩包，可以看到有<code>bin、include、lib</code>目录。</p>
+<p>打开 <code>“C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA”</code> 目录，找到你安装的版本目录，打开，将cuDNN压缩包内<code>bin、include、lib</code>目录下的文件分别复制过去。</p>
+</li>
+</ul>
+<h2 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h2><p>安装tensorflow是基于Python的，所以我们先创建一个用于tensorflow开发的虚拟环境。</p>
+<p>安装tenforflow需要注意各个依赖之间的版本适配，去官网可以查到对应关系：</p>
+<p><a target="_blank" rel="noopener" href="https://tensorflow.google.cn/install/source_windows#gpu">https://tensorflow.google.cn/install/source_windows#gpu</a></p>
+
             </div>
             <hr>
             <div>
@@ -282,9 +318,9 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/VsCode/">VsCode</a>
-                    
                       <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/VsCode/">VsCode</a>
                     
                   </div>
                 
