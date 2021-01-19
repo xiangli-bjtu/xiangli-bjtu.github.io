@@ -35,7 +35,7 @@ git config --global user.email  "xavierlee.gy@gmail.com"  // 填写自己的gith
 ```text
 ssh-keygen -t rsa -C "xavierlee.gy@gmail.com"
 ```
-然后连续3次回车，会在用户目录下生成一个``.ssh`文件夹里面有公钥、私钥、主机列表三个文件。打开`.ssh\id_rsa.pub`文件，这个就是公钥。然后进入你的github主页，进入`个人设置 → SSH and GPG keys → New SSH key`将刚复制的内容粘贴到key那里，title随便填，保存。
+然后连续3次回车，会在用户目录下生成一个`.ssh`文件夹里面有公钥、私钥、主机列表三个文件。打开`.ssh\id_rsa.pub`文件，这个就是公钥。然后进入你的github主页，进入`个人设置 → SSH and GPG keys → New SSH key`将刚复制的内容粘贴到key那里，title随便填，保存。
 
 输入以下命令检查是否配置成功：
 
@@ -43,7 +43,7 @@ ssh-keygen -t rsa -C "xavierlee.gy@gmail.com"
 ssh -T git@github.com
 ```
 
-出现提示，输入yes，如果之后看到 ”You've successfully authenticated, but GitHub does not provide shell access.“ 说明SSH已配置成功！
+出现提示，输入yes，如果之后看到` You've successfully authenticated, but GitHub does not provide shell access. `说明SSH已配置成功！
 
 [关于ssh的原理](https://www.jianshu.com/p/33461b619d53)
 
@@ -81,12 +81,12 @@ hexo init
 
 初始化完成之后，我们可以看到多个文件目录：
 
-- node_modules: 依赖包
-- public：存放生成的页面
-- scaffolds：生成文章的一些模板
-- source：用来存放你的文章
-- themes：主题
-- ** _config.yml: 博客的配置文件**
+- `node_modules`: 依赖包
+- `public`：存放生成的页面
+- `scaffolds`：生成文章的一些模板
+- `source`：用来存放你的文章
+- `themes`：主题
+- `_config.yml`: 博客的配置文件
 
 执行
 
@@ -95,7 +95,7 @@ hexo clean
 hexo generate
 ```
 
-其中 `hexo clean`清除了你之前生成的东西，也可以不加，更为简略的命令是使用缩写用 `hexo g`
+其中 `hexo clean`清除了你之前生成的东西，也可以不加，更为简略的命令是使用缩写用 `hexo c`
 
  `hexo generate` 顾名思义生成静态文章，可以用 `hexo g`缩写
 
@@ -160,7 +160,7 @@ hexo deploy
 
 ## **Front-matter**
 
-Front-matter 是markdown文件最上方以 `---` 分隔的区域，用于指定个别文件的变量，举例来说：
+ [Front-matter](https://hexo.io/zh-cn/docs/front-matter)  是markdown文件最上方以 `---` 分隔的区域，用于指定个别文件的变量，举例来说：
 
 ```text
 title: Hello World
@@ -186,15 +186,7 @@ date: 2013/7/13 20:46:25
 
 `permalink `覆盖文章网址
 
-其中，分类和标签需要区别一下，分类具有顺序性和层次性，也就是说 `Foo, Bar` 不等于 `Bar, Foo`；而标签没有顺序和层次。
-
-```text
-categories:
-- Diary
-tags:
-- PS3
-- Games
-```
+其中分类和标签的区别在于：分类具有顺序性和层次性，也就是说 `Foo, Bar` 不等于 `Bar, Foo`；而标签没有顺序和层次。
 
 ## 3种**layout（布局）**
 
@@ -291,7 +283,7 @@ navbar:
 
 ### 文章在首页的略缩图
 
-markdown文章开头的 [Front-matter](https://hexo.io/zh-cn/docs/front-matter) ，可添加 `index_img` 属性。
+markdown文章开头的 `Front-matter` ，可添加 `index_img` 属性。
 
 ```text
 ---
@@ -341,7 +333,7 @@ post:
     engine: mathjax
 ```
 
-`specific`: 建议开启。当为 true 时，只有在文章 [Front-matter](https://hexo.io/zh-cn/docs/front-matter) 里指定 `math: true` 才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度。
+`specific`: 建议开启。当为 true 时，只有在文章 `Front-matter` 里指定 `math: true` 才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度。
 
 `engine`: 公式渲染引擎，目前支持 `mathjax` 或 `katex`。
 
@@ -529,4 +521,6 @@ npm install hexo-deployer-git --save
 
 
 # 绑定域名
+
+待补充……
 
