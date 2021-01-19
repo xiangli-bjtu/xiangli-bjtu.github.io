@@ -228,10 +228,10 @@
 git config --global user.email  &quot;xavierlee.gy@gmail.com&quot;  // 填写自己的github注册邮箱</code></pre>
 <h2 id="配置ssh免密登录"><a href="#配置ssh免密登录" class="headerlink" title="配置ssh免密登录"></a>配置ssh免密登录</h2><p>提交代码需要提供你的github权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用ssh key来解决本地和服务器的连接问题。右键git bash执行以下命令：</p>
 <pre><code class="hljs text">ssh-keygen -t rsa -C &quot;xavierlee.gy@gmail.com&quot;</code></pre>
-<p>然后连续3次回车，会在用户目录下生成一个``.ssh<code>文件夹里面有公钥、私钥、主机列表三个文件。打开</code>.ssh\id_rsa.pub<code>文件，这个就是公钥。然后进入你的github主页，进入</code>个人设置 → SSH and GPG keys → New SSH key`将刚复制的内容粘贴到key那里，title随便填，保存。</p>
+<p>然后连续3次回车，会在用户目录下生成一个<code>.ssh</code>文件夹里面有公钥、私钥、主机列表三个文件。打开<code>.ssh\id_rsa.pub</code>文件，这个就是公钥。然后进入你的github主页，进入<code>个人设置 → SSH and GPG keys → New SSH key</code>将刚复制的内容粘贴到key那里，title随便填，保存。</p>
 <p>输入以下命令检查是否配置成功：</p>
 <pre><code class="hljs text">ssh -T git@github.com</code></pre>
-<p>出现提示，输入yes，如果之后看到 ”You’ve successfully authenticated, but GitHub does not provide shell access.“ 说明SSH已配置成功！</p>
+<p>出现提示，输入yes，如果之后看到<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code>说明SSH已配置成功！</p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/33461b619d53">关于ssh的原理</a></p>
 <h2 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h2><p>创建博客的hexo工具基于node.js，所以需要安装一下node.js和包管理工具npm，直接去官网下载安装即可。</p>
 <p>检测npm是否安装成功，在命令行中输入<code>npm -v </code>。另外，windows在git安装完后，就可以直接使用git bash来敲命令行了，不用自带的cmd</p>
@@ -246,17 +246,17 @@ git config --global user.email  &quot;xavierlee.gy@gmail.com&quot;  // 填写自
 <pre><code class="hljs text">hexo init</code></pre>
 <p>初始化完成之后，我们可以看到多个文件目录：</p>
 <ul>
-<li>node_modules: 依赖包</li>
-<li>public：存放生成的页面</li>
-<li>scaffolds：生成文章的一些模板</li>
-<li>source：用来存放你的文章</li>
-<li>themes：主题</li>
-<li>** _config.yml: 博客的配置文件**</li>
+<li><code>node_modules</code>: 依赖包</li>
+<li><code>public</code>：存放生成的页面</li>
+<li><code>scaffolds</code>：生成文章的一些模板</li>
+<li><code>source</code>：用来存放你的文章</li>
+<li><code>themes</code>：主题</li>
+<li><code>_config.yml</code>: 博客的配置文件</li>
 </ul>
 <p>执行</p>
 <pre><code class="hljs text">hexo clean
 hexo generate</code></pre>
-<p>其中 <code>hexo clean</code>清除了你之前生成的东西，也可以不加，更为简略的命令是使用缩写用 <code>hexo g</code></p>
+<p>其中 <code>hexo clean</code>清除了你之前生成的东西，也可以不加，更为简略的命令是使用缩写用 <code>hexo c</code></p>
 <p> <code>hexo generate</code> 顾名思义生成静态文章，可以用 <code>hexo g</code>缩写</p>
 <p>将本地的markdown文件编译成静态文件（即显示网页必须的内容如html、css、js等）。这些内容会保存博客文件夹内。接下来执行<code>hexo s</code> 测试hexo是否安装成功，打开浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 若能看到内容则说明安装成功</p>
 <p>使用<code>ctrl+c</code>可以把服务关掉。</p>
@@ -282,7 +282,7 @@ hexo deploy</code></pre>
 <p><code>language</code>网站使用的语言</p>
 <p><code>timezone</code>网站时区。Hexo 默认使用您电脑的时区。<a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">时区列表</a>。比如说：<code>America/New_York</code>, <code>Japan</code>, 和 <code>UTC</code> 。</p>
 <h2 id="博客图片内容管理"><a href="#博客图片内容管理" class="headerlink" title="博客图片内容管理"></a>博客图片内容管理</h2><p>修改本地hexo博客目录下站点配置文件<code>_config.yml</code>中的<code>post_asset_folder:false</code>这个选项设置为<code>true</code>。这样在运行<code>hexo n &quot;xxxx&quot;</code>来生成marnkown文时，<code>/source/_posts</code>文件夹内除了xxxx.md文件还有一个同名的文件夹，用于存放markdown文件里需要插入的图片</p>
-<h2 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a><strong>Front-matter</strong></h2><p>Front-matter 是markdown文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p>
+<h2 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a><strong>Front-matter</strong></h2><p> <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a>  是markdown文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p>
 <pre><code class="hljs text">title: Hello World
 date: 2013/7/13 20:46:25
 ---</code></pre>
@@ -295,12 +295,7 @@ date: 2013/7/13 20:46:25
 <p><code>tags </code>标签</p>
 <p><code>categories </code>分类</p>
 <p><code>permalink </code>覆盖文章网址</p>
-<p>其中，分类和标签需要区别一下，分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
-<pre><code class="hljs text">categories:
-- Diary
-tags:
-- PS3
-- Games</code></pre>
+<p>其中分类和标签的区别在于：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
 <h2 id="3种layout（布局）"><a href="#3种layout（布局）" class="headerlink" title="3种layout（布局）"></a>3种<strong>layout（布局）</strong></h2><p>Hexo 有三种默认布局：<code>post</code>、<code>page</code> 和 <code>draft</code>。在创建这三种不同类型的文件时，它们将会被保存到不同的路径：</p>
 <table>
 <thead>
@@ -365,7 +360,7 @@ tags:
 <p>如需单独区别设置，可在<strong>主题配置</strong>中设置：</p>
 <pre><code class="hljs text">navbar:
   blog_title: 记录学习的点滴 # 导航栏左侧的标题，为空则按 hexo config.title 显示</code></pre>
-<h3 id="文章在首页的略缩图"><a href="#文章在首页的略缩图" class="headerlink" title="文章在首页的略缩图"></a>文章在首页的略缩图</h3><p>markdown文章开头的 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a> ，可添加 <code>index_img</code> 属性。</p>
+<h3 id="文章在首页的略缩图"><a href="#文章在首页的略缩图" class="headerlink" title="文章在首页的略缩图"></a>文章在首页的略缩图</h3><p>markdown文章开头的 <code>Front-matter</code> ，可添加 <code>index_img</code> 属性。</p>
 <pre><code class="hljs text">---
 title: 文章标题
 tags: [Hexo, Fluid]
@@ -392,7 +387,7 @@ layout: about
     enable: true
     specific: true
     engine: mathjax</code></pre>
-<p><code>specific</code>: 建议开启。当为 true 时，只有在文章 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a> 里指定 <code>math: true</code> 才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度。</p>
+<p><code>specific</code>: 建议开启。当为 true 时，只有在文章 <code>Front-matter</code> 里指定 <code>math: true</code> 才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度。</p>
 <p><code>engine</code>: 公式渲染引擎，目前支持 <code>mathjax</code> 或 <code>katex</code>。</p>
 <p><strong>MathJax</strong></p>
 <p>优点</p>
@@ -505,7 +500,8 @@ hexo d -g</code></pre>
 npm <span class="hljs-keyword">install</span>
 npm <span class="hljs-keyword">install</span> hexo-deployer-git --save</code></pre>
 <p>接下来就可以开始愉快的写博客了，写完之后记得把源文件代码 push 到 Github 上，然后用 Hexo 部署到自己博客上面</p>
-<h1 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h1>
+<h1 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h1><p>待补充……</p>
+
             </div>
             <hr>
             <div>
@@ -537,7 +533,7 @@ npm <span class="hljs-keyword">install</span> hexo-deployer-git --save</code></p
                     
                       <a href="/2019/10/28/Win10%E7%B3%BB%E7%BB%9F%E4%B8%8Bpython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88%E6%90%AD%E9%85%8DVsCode%E4%BD%BF%E7%94%A8%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Win10系统下python环境搭建（搭配VsCode使用）</span>
+                        <span class="hidden-mobile">Python开发环境搭建</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

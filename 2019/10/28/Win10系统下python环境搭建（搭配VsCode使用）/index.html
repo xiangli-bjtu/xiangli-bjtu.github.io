@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Xiang Li">
   <meta name="keywords" content="">
-  <title>Win10系统下python环境搭建（搭配VsCode使用） - 李翔的个人博客</title>
+  <title>Python开发环境搭建 - 李翔的个人博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      888 字
+      1k 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      11
        分钟
     </span>
   
@@ -217,48 +217,55 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Win10系统下python环境搭建（搭配VsCode使用）</h1>
+            <h1 style="display: none">Python开发环境搭建</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="安装python环境"><a href="#安装python环境" class="headerlink" title="安装python环境"></a>安装python环境</h1><h2 id="下载并安装minicaonda"><a href="#下载并安装minicaonda" class="headerlink" title="下载并安装minicaonda"></a>下载并安装minicaonda</h2><p>conda是一个开源的软件包管理工具和环境管理系统，可以轻松创建多个软件环境，并在多个环境之间轻松切换。例如，我们可以分别创建python3和python2的独立软件环境，并在需要该环境时轻松进行切换（根据工作目录）。与 conda有关的配置软件有两个，miniconda（含基本工具占用空间约400M），anaconda（包括常用到的python库以及GUI工具，占用空间约3G）。因为我们只是需要conda这个包管理工具，并且习惯使用VsCode作为python的编辑器。仅需要miniconda即可。</p>
-<p>直接下载<a target="_blank" rel="noopener" href="https://conda.io/miniconda.html">官方miniconda安装包</a>，在下载页面选择对应平台的安装包进行安装。 自带python环境，可以根据自己长期使用的版本进行选择。</p>
-<p>下载好安装包后，安装时可以选择作为用户软件安装（储存到C盘下的<code>User/用户文件夹</code>），或者做为系统软件安装（所有用户都可以使用）</p>
-<p>到下面这一步时，勾选两个选项，即添加miniconda至环境变量PATH，注册miniconda所带的python为默认环境</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/miniconda.png" srcset="/img/loading.gif"></p>
-<h2 id="修改为国内镜像源"><a href="#修改为国内镜像源" class="headerlink" title="修改为国内镜像源"></a>修改为国内镜像源</h2><p>默认的conda源在国外，下载python第三方包时由于大陆互联网的管制会很慢。</p>
-<p>这里，我们使用清华的镜像：<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a></p>
+              <h1 id="安装Python"><a href="#安装Python" class="headerlink" title="安装Python"></a>安装Python</h1><h2 id="下载并安装minicaonda"><a href="#下载并安装minicaonda" class="headerlink" title="下载并安装minicaonda"></a>下载并安装minicaonda</h2><p>conda是一个开源的软件包管理工具和环境管理系统，可以轻松创建虚拟环境，并在多个环境之间轻松切换。例如，我们可以分别创建Python3和Python2的独立软件环境，并在需要该环境时轻松进行切换（根据工作目录）。</p>
+<p>与 conda有关的配置软件有两个，miniconda（含基本工具占用空间约400M），anaconda（包括常用到的python库以及GUI工具，占用空间约3G）。因为我们只是需要conda这个包管理工具，仅需要下载miniconda即可。</p>
+<p>直接下载<a target="_blank" rel="noopener" href="https://conda.io/miniconda.html">官方miniconda安装包</a>，在下载页面选择对应平台的安装包进行安装。 自带Python环境，可以根据自己长期使用的版本进行选择。下载好安装包后，安装时可以选择作为用户软件安装（储存到C盘下的<code>User/用户文件夹</code>），或者做为系统软件安装（所有用户都可以使用）</p>
+<p>注意安装过程进行到到下面这一步时，需要勾选两个选项：添加miniconda至环境变量PATH，注册miniconda所带的python.exe为默认解释器</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/miniconda.png" srcset="/img/loading.gif"></p>
+<h2 id="安装第三方库的方法"><a href="#安装第三方库的方法" class="headerlink" title="安装第三方库的方法"></a>安装第三方库的方法</h2><ul>
+<li>默认的conda源在国外，下载Python第三方包时由于大陆互联网的管制会很慢。因此我们可以使用清华的镜像，执行以下命令：</li>
+</ul>
 <pre><code class="hljs text">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config --set show_channel_urls yes</code></pre>
-<p>此时，目录 C:\Users&lt;你的用户名&gt; 下就会生成配置文件.condarc，可以查看conda的所有源。</p>
-<p>除了conda，python还有一个自带的包管理工具pip，也可以将其替换为国内源，直接在user目录中创建一个pip目录，如：C:\Users\xxxx\pip，新建文件pip.ini，内容如下：</p>
+<p>此时，在本地目录<code>C:\Users&lt;你的用户名&gt;</code>下就会生成配置文件<code>.condarc</code>，可以查看conda的所有源。</p>
+<p>如果想要还原conda默认源，执行以下命令：</p>
+<pre><code class="hljs python">conda config --remove-key channels</code></pre>
+<ul>
+<li>除了conda，Python还有一个自带的包管理工具pip，也可以将其替换为国内源，直接在user目录中创建一个pip目录，如：C:\Users\xxxx\pip，新建文件pip.ini，内容如下：</li>
+</ul>
 <pre><code class="hljs text">[global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
-
-
-<h2 id="虚拟环境的使用"><a href="#虚拟环境的使用" class="headerlink" title="虚拟环境的使用"></a>虚拟环境的使用</h2><p>虚拟环境的好处可以使我们在创建不同的python项目时，避免相互之间的影响。</p>
+<ul>
+<li>如果遇到在线下载一直失败（网速太慢），或者选择镜像源没有对应的包，可以尝试去以下两个网址下载离线文件进行解压：</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://repo.anaconda.com/pkgs/main/win-64/">https://repo.anaconda.com/pkgs/main/win-64/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#ecos">https://www.lfd.uci.edu/~gohlke/pythonlibs/#ecos</a></p>
+<h2 id="虚拟环境的使用"><a href="#虚拟环境的使用" class="headerlink" title="虚拟环境的使用"></a>虚拟环境的使用</h2><p>虚拟环境的好处可以使我们在创建不同的Python项目时，避免相互之间的影响。</p>
 <p>若我现在需要做一个项目使用 python3.6 的环境，可以在终端运行以下命令</p>
 <pre><code class="hljs text">conda create --name 项目名 python=3.6</code></pre>
 <p>创建环境的过程中会让你确认该环境所需软件包，一般直接输入y后按回车就可以了。环境创建在miniconda安装路径下的<code>\env</code>子文件夹下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/env_location.JPG" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/env_location.JPG" srcset="/img/loading.gif"></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lyy14011305/article/details/59500819">点此查看更多虚拟环境的使用方法</a></p>
-<h1 id="搭配VsCode使用"><a href="#搭配VsCode使用" class="headerlink" title="搭配VsCode使用"></a>搭配VsCode使用</h1><h2 id="修改VsCode的终端以搭配虚拟环境"><a href="#修改VsCode的终端以搭配虚拟环境" class="headerlink" title="修改VsCode的终端以搭配虚拟环境"></a>修改VsCode的终端以搭配虚拟环境</h2><p>在windows平台下，VsCode打开的终端默认支持的是powershell，因为某些原因不支持不支持激活conda所创建的虚拟环境作为python项目的解释器。</p>
+<h1 id="VsCode配置"><a href="#VsCode配置" class="headerlink" title="VsCode配置"></a>VsCode配置</h1><p><strong>Win10下最为省事的还是Pycharm，不过Pycharm比较吃内存我还是喜欢用轻量化的Vscode，并且Vscode有丰富的插件支持</strong></p>
+<p>在windows平台下，由于VsCode打开的终端默认支持的是powershell，单因为某些原因在powershell内输入激活conda所创建的虚拟环境命令，并不能成功生效</p>
 <ul>
-<li>一种解决办法是打开VsCode的terminal窗口，将默认的shell手动修改为cmd。重启之后终端输入<code>conda activate MARL_V2X</code>激活所创建的虚拟环境</li>
+<li>一种解决办法是打开VsCode的terminal窗口，将默认的shell手动修改为cmd。重启之后终端输入<code>conda activate 虚拟环境名</code>激活所创建的虚拟环境</li>
 </ul>
 <p>输入<code>conda deactivate</code>退出虚拟环境。</p>
 <ul>
-<li>当然，如果熟悉在linux下工作，可以常识将其改成gitbash，gitbash可以通过下载git软件来获取。</li>
+<li>当然，如果熟悉在linux下工作的指令，可以尝试将Vscode的默认终端改成gitbash，gitbash可以通过下载git软件来获取。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/gitbash_location.JPG" srcset="/img/loading.gif"></p>
-<p>打开VsCode的用户设置文件（ctrl+shifp+p），修改<code>setting.json</code>文件增加如下两行：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/modify_setting.JPG" srcset="/img/loading.gif"></p>
+<p>下载好git后打开VsCode的用户设置文件<code>ctrl+shifp+p</code>，修改<code>setting.json</code>文件增加如下两行：</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/modify_setting.JPG" srcset="/img/loading.gif"></p>
 <p>重启VsCode后终端默认调用的shell就变成了gitbash：</p>
-<p>不过此时需要多一个步骤，在终端首先输入<code>source activate</code>，可以看到此时已经激活了conda，这是还是base环境即默认的python解释器</p>
-<p>终端输入<code>conda activate MARL_V2X</code>激活所创建的虚拟环境</p>
-<p>输入<code>conda deactivate</code>退出虚拟环境</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/entry_out_env.JPG" srcset="/img/loading.gif"></p>
-
+<p>不过此时还需要一个步骤，在终端首先输入<code>source activate</code>，可以看到此时已经激活了conda，这是还是base环境即默认的Python解释器</p>
+<p>终端输入<code>conda activate 虚拟环境名</code>激活所创建的虚拟环境</p>
+<h1 id="Jupyterlab"><a href="#Jupyterlab" class="headerlink" title="Jupyterlab"></a>Jupyterlab</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/154515490">https://zhuanlan.zhihu.com/p/154515490</a></p>
+<h1 id="深度学习平台的配置"><a href="#深度学习平台的配置" class="headerlink" title="深度学习平台的配置"></a>深度学习平台的配置</h1>
             </div>
             <hr>
             <div>
@@ -275,9 +282,9 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
-                    
                       <a class="hover-with-bg" href="/tags/VsCode/">VsCode</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
                     
                   </div>
                 
@@ -437,7 +444,7 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Win10系统下python环境搭建（搭配VsCode使用）&nbsp;",
+        "Python开发环境搭建&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
