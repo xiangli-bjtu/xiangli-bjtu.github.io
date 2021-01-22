@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      1.7k 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      20
        分钟
     </span>
   
@@ -293,8 +293,7 @@
 </ul>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="文件系统互通"><a href="#文件系统互通" class="headerlink" title="文件系统互通"></a>文件系统互通</h3><p>WSL2 访问 Windows 文件系统依然通过挂载分区的方式，WSL里面访问windows文件很简单，你只需要输入<code>cd /mnt/d</code>，就是d盘了，以此类推。</p>
 <p>相比于 WSL1，这次增加了 Windows 访问 Linux 分区的能力，可以在资源管理器中输入 <code>\\wsl$\&lt;子系统名&gt;</code> 访问对应的子系统分区，为了方便也可以在资源管理器中把 Linux 分区挂载成一个磁盘。</p>
-<h3 id="GPU-支持"><a href="#GPU-支持" class="headerlink" title="GPU 支持"></a>GPU 支持</h3><p>Build 2020 发出消息说 WSL2 要支持 GPU，Nvidia 也发出了 CUDA on WSL2 的预览版，在这里：<a href="https://link.zhihu.com/?target=https://developer.nvidia.com/cuda/wsl">https://developer.nvidia.com/cuda/wsl</a>。</p>
-<p>这意味着以后可以直接在 Windows 上使用 GPU 加速训练模型了，虽然支持成都还很有限，但是相比于 Mac 可领先了一个身位都不只了。</p>
+<h3 id="GPU-支持"><a href="#GPU-支持" class="headerlink" title="GPU 支持"></a>GPU 支持</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/149517344">https://zhuanlan.zhihu.com/p/149517344</a></p>
 <h3 id="使用-Docker"><a href="#使用-Docker" class="headerlink" title="使用 Docker"></a>使用 Docker</h3><p>WSL2 带来了完整的 Linux 内核，所以可以参照 Docker 在 Linux 上安装的过程安装 Docker，并且可以正常使用，但是会有一个小瑕疵。WSL2 的 systemd 吧…还不是原生的，也就是在 WSL1 上就有的无法启动服务守护进程的问题依然存在，Docker 服务自然也不能幸免。</p>
 <p>解决这个问题有三种方案：</p>
 <ul>
