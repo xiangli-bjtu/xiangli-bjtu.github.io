@@ -124,7 +124,8 @@ wsl --set-default-version 2
 
   确保`<distribution name>`用发行版的实际名称和`<versionNumber>`数字“ 1”或“ 2”代替。
 
-  
+
+**注意**：WSL默认安装在Windows的C盘，单单一个WSL不会造成C盘太大的负担，但是当你对WSL使用增多，尤其一通`apt-get install`操作后，C盘容量可能变得捉急，因此使用WSL后C盘使用容量这点需要大家注意。
 
 ## 设置
 
@@ -136,17 +137,9 @@ WSL2 访问 Windows 文件系统依然通过挂载分区的方式，WSL里面访
 
 ### GPU 支持
 
-Build 2020 发出消息说 WSL2 要支持 GPU，Nvidia 也发出了 CUDA on WSL2 的预览版，在这里：[https://developer.nvidia.com/cuda/wsl](https://link.zhihu.com/?target=https%3A//developer.nvidia.com/cuda/wsl)。
-
-这意味着以后可以直接在 Windows 上使用 GPU 加速训练模型了，虽然支持成都还很有限，但是相比于 Mac 可领先了一个身位都不只了。
+https://zhuanlan.zhihu.com/p/149517344
 
 ### 使用 Docker
 
-WSL2 带来了完整的 Linux 内核，所以可以参照 Docker 在 Linux 上安装的过程安装 Docker，并且可以正常使用，但是会有一个小瑕疵。WSL2 的 systemd 吧...还不是原生的，也就是在 WSL1 上就有的无法启动服务守护进程的问题依然存在，Docker 服务自然也不能幸免。
-
-解决这个问题有三种方案：
-
-- 可以让 Windows 执行开机脚本，通过脚本启动 WSL2 中的 Docker，参见[https://blog.csdn.net/XhyEax/article/details/105560377](https://link.zhihu.com/?target=https%3A//blog.csdn.net/XhyEax/article/details/105560377)，这种方案在 WSL1 时代就有，我自己使用过没碰到过问题。
-- 第二种方案是使用第三方工具运行 systemd，参见 [https://github.com/arkane-systems/genie](https://link.zhihu.com/?target=https%3A//github.com/arkane-systems/genie)，原理是提供了一个单独的 namespace 跑 systemd。
-- 第三种方案是使用 Docker Desktop，2.3.0.2 以上版本已经支持 WSL2 和 Hyper-V，免去一些折腾。
+后续学习Docker时再补充……
 
