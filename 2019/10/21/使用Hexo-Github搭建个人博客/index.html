@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.5k 字
+      4.6k 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      52
+      53
        分钟
     </span>
   
@@ -417,6 +417,14 @@ layout: about
 <p>然后根据上方配置不同的 <code>engine</code>，推荐更换如下渲染器：</p>
 <p>mathjax: <code>npm install hexo-renderer-kramed --save</code></p>
 <p>katex: <code>npm install @upupming/hexo-renderer-markdown-it-plus --save</code></p>
+<p><strong>3. 文章中设置</strong></p>
+<p>如果你写的文章里面用到了数学公式，需要在文章Front-matter里打开mathjax开关。</p>
+<pre><code class="hljs text">---
+title: index.html
+date: 2018-12-5 01:30:30
+tags:
+mathjax: true
+--</code></pre>
 <h3 id="社交链接"><a href="#社交链接" class="headerlink" title="社交链接"></a>社交链接</h3><p>在主题配置中设置：</p>
 <pre><code class="hljs yaml"><span class="hljs-attr">about:</span>
   <span class="hljs-attr">icons:</span> <span class="hljs-comment"># 更多图标可从 https://hexo.fluid-dev.com/docs/icon/ 查找，class 代表图标的 css class</span>
