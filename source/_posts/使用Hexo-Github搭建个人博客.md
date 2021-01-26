@@ -376,6 +376,19 @@ mathjax: `npm install hexo-renderer-kramed --save`
 
 katex: `npm install @upupming/hexo-renderer-markdown-it-plus --save`
 
+**3. 文章中设置**
+
+如果你写的文章里面用到了数学公式，需要在文章Front-matter里打开mathjax开关。
+
+```text
+---
+title: index.html
+date: 2018-12-5 01:30:30
+tags:
+mathjax: true
+--
+```
+
 ### 社交链接
 
 在主题配置中设置：

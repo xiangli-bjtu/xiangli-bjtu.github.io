@@ -124,7 +124,6 @@ wsl --set-default-version 2
 
   确保`<distribution name>`用发行版的实际名称和`<versionNumber>`数字“ 1”或“ 2”代替。
 
-
 **注意**：WSL默认安装在Windows的C盘，单单一个WSL不会造成C盘太大的负担，但是当你对WSL使用增多，尤其一通`apt-get install`操作后，C盘容量可能变得捉急，因此使用WSL后C盘使用容量这点需要大家注意。
 
 ## 设置
