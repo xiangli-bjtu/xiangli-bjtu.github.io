@@ -246,10 +246,10 @@
 </ul>
 </li>
 </ul>
-<p>汇编的过程包括词法分析、语义分析、中间代码优化等细节，汇编语言相对C语言这类高级语言也更加低级且与计算机的底层硬件密切相关。本书不会过多的展开，对这部分感兴趣的可以在读完本书后去学习<strong>编译原理</strong></p>
+<p>汇编的过程包括词法分析、语义分析、中间代码优化等细节，汇编语言相对C语言这类高级语言也更加低级且与计算机的底层硬件密切相关。本书不会过多的展开，对这部分感兴趣的可以在读完本书后去学习编译原理</p>
 <ul>
-<li><strong>汇编</strong>：将汇编程序翻译成<strong>机器语言指令</strong>，并将其打包成一种叫可重定位目标程序(relocatable object program)的二进制文件</li>
-<li><strong>链接</strong>：链接器将各个.o文件合并成可执行文件。链接器使得分离编译成为可能。在编写大型程序时，通常会使用到各种函数库，但是我们代码中并没有这些函数的具体实现，所以就需要在链接阶段将该函数的具体实现合并，最终得到可执行目标文件。</li>
+<li><strong>汇编</strong>：将汇编程序翻译成<strong>机器语言指令</strong>，并将其打包成一种叫<strong>可重定位目标程序</strong>(relocatable object program)的二进制文件。对于微软编译器（内嵌在 Visual C++ 或者 Visual Studio 中），目标文件的后缀为<code>.obj</code></li>
+<li><strong>链接</strong>：链接器将各个.o文件合并成<strong>可执行文件</strong>。链接器使得分离编译成为可能。在编写大型程序时，通常会使用到各种函数库，但是我们代码中并没有这些函数的具体实现，所以就需要在链接阶段将该函数的具体实现合并，最终得到可执行目标文件。</li>
 </ul>
 <h1 id="计算机的硬件组成"><a href="#计算机的硬件组成" class="headerlink" title="计算机的硬件组成"></a>计算机的硬件组成</h1><p>经历了上一步，可执行目标文件已经在磁盘上了。那么如何运行这个程序呢，以Linux系统为例：</p>
 <img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/image-20210123112721494.png" srcset="/img/loading.gif" alt="image-20210123112721494" style="zoom:67%;" />
@@ -354,7 +354,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/11/12/%E3%80%8ACSAPP%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/">
+                      <a href="/2019/11/28/%E3%80%8ACSAPP%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">《CSAPP》读书笔记（2）：信息的表示和处理</span>
                         <span class="visible-mobile">上一篇</span>

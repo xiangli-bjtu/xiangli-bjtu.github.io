@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      2.1k 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      25
        分钟
     </span>
   
@@ -292,6 +292,34 @@
 </li>
 </ul>
 <p><strong>注意</strong>：WSL默认安装在Windows的C盘，单单一个WSL不会造成C盘太大的负担，但是当你对WSL使用增多，尤其一通<code>apt-get install</code>操作后，C盘容量可能变得捉急，因此使用WSL后C盘使用容量这点需要大家注意。</p>
+<h2 id="搭配VS-Code使用"><a href="#搭配VS-Code使用" class="headerlink" title="搭配VS Code使用"></a>搭配VS Code使用</h2><p>首先需要：</p>
+<ul>
+<li>安装VS Code时需要勾选环境变量添加到<code>path</code></li>
+<li>在VS Code插件选项安装<code>Remote Development</code>，包含了<code>Remote-WSL</code>、<code>Remote-SSH</code>、<code>Remote Contains</code>3个插件</li>
+</ul>
+<p>VS Code和WSL的交互有两种方式：</p>
+<ol>
+<li><p><strong>VS Code打开</strong>：进入VS Code中按下快捷键<code>Crtl+Shift+p</code>，选择<code>Remote-WSL</code>命令，等待片刻后会打开一个连接到WSL的新窗口，此时工作区新建的文件夹就默认是在WSL中的了，也可以直接选择WSL内已存在的文件夹</p>
+</li>
+<li><p><strong>命令行打开</strong>：从WSL下切换到想要打开的项目, 既可以是WSL环境下的目录，也可以是Windows系统里的目录（不过要注意Windows的目录是以挂载的方式，如C盘在<code>/mnt/c</code>下面）。然后在命令行里敲<code>code .</code>，或者直接使用<code>code 文件夹</code>的方式。这样就能以Linux环境的模式打开VS Code</p>
+</li>
+</ol>
+<p><strong>C/C++ 开发环境配置</strong></p>
+<ul>
+<li>由于默认源在国外会遇到软件更新下速度慢的情况，建议先<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/61228593">更换国内源</a>，再执行以下命令在WSL中安装了编译器套件（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/113246292">关于Linux下修改文件内容的操作</a>)</li>
+</ul>
+<pre><code class="hljs routeros"><span class="hljs-comment"># 安装C语言编译器</span>
+sudo apt-<span class="hljs-builtin-name">get</span> install gcc
+<span class="hljs-comment"># 安装C++编译器</span>
+sudo apt-<span class="hljs-builtin-name">get</span> install g++</code></pre>
+<blockquote>
+<p>gcc 最开始的时候是 GNU C Compiler, 就是一个c编译器。但是后来因为这个项目里边集成了更多其他不同语言的编译器，GCC就代表 the GNU Compiler Collection，所以表示一堆编译器的合集。GCC已经不是当初那个c语言编译器了，更确切的说他是一个驱动程序，根据代码的后缀名来判断调用c编译器还是c++编译器 (g++)。比如你的代码后缀是*.c，他会调用c编译器还有linker去链接c的library。如果你的代码后缀是cpp, 他会调用g++编译器，当然library call也是c++版本的。</p>
+<p>简单来将把gcc当成c语言编译器，g++当成c++语言编译器用就是了。</p>
+</blockquote>
+<ul>
+<li>在VSCode中安装两个插件，这样不用配置tasks.json和luanch.json文件就可以很方便的编译并运行源代码文件</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/image-20210126102445706.png" srcset="/img/loading.gif" alt="image-20210126102445706"></p>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="文件系统互通"><a href="#文件系统互通" class="headerlink" title="文件系统互通"></a>文件系统互通</h3><p>WSL2 访问 Windows 文件系统依然通过挂载分区的方式，WSL里面访问windows文件很简单，你只需要输入<code>cd /mnt/d</code>，就是d盘了，以此类推。</p>
 <p>相比于 WSL1，这次增加了 Windows 访问 Linux 分区的能力，可以在资源管理器中输入 <code>\\wsl$\&lt;子系统名&gt;</code> 访问对应的子系统分区，为了方便也可以在资源管理器中把 Linux 分区挂载成一个磁盘。</p>
 <h3 id="GPU-支持"><a href="#GPU-支持" class="headerlink" title="GPU 支持"></a>GPU 支持</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/149517344">https://zhuanlan.zhihu.com/p/149517344</a></p>
@@ -314,6 +342,8 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/VS-Code/">VS Code</a>
                     
                   </div>
                 
