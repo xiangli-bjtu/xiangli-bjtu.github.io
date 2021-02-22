@@ -4,6 +4,7 @@ date: 2019-11-2 14:43:25
 index_img: /img/post_index_img/WSL.png
 tags:
 - Linux
+- VS Code
 categories:
 - 技术
 ---
@@ -85,6 +86,10 @@ settings.json配置文件主要包含了如下的几个部分：
 
 
 
+## 添加到右键菜单
+
+参考：https://www.cnblogs.com/jasongrass/p/12960289.html
+
 # WSL2
 
 ## 安装
@@ -125,6 +130,38 @@ wsl --set-default-version 2
   确保`<distribution name>`用发行版的实际名称和`<versionNumber>`数字“ 1”或“ 2”代替。
 
 **注意**：WSL默认安装在Windows的C盘，单单一个WSL不会造成C盘太大的负担，但是当你对WSL使用增多，尤其一通`apt-get install`操作后，C盘容量可能变得捉急，因此使用WSL后C盘使用容量这点需要大家注意。
+
+## 搭配VS Code使用
+
+首先需要：
+
+- 安装VS Code时需要勾选环境变量添加到`path`
+- 在VS Code插件选项安装`Remote Development`，包含了`Remote-WSL`、`Remote-SSH`、`Remote Contains`3个插件
+
+VS Code和WSL的交互有两种方式：
+
+1. **VS Code打开**：进入VS Code中按下快捷键`Crtl+Shift+p`，选择`Remote-WSL`命令，等待片刻后会打开一个连接到WSL的新窗口，此时工作区新建的文件夹就默认是在WSL中的了，也可以直接选择WSL内已存在的文件夹
+
+2. **命令行打开**：从WSL下切换到想要打开的项目, 既可以是WSL环境下的目录，也可以是Windows系统里的目录（不过要注意Windows的目录是以挂载的方式，如C盘在`/mnt/c`下面）。然后在命令行里敲`code .`，或者直接使用`code 文件夹`的方式。这样就能以Linux环境的模式打开VS Code
+
+**C/C++ 开发环境配置**
+
+* 由于默认源在国外会遇到软件更新下速度慢的情况，建议先[更换国内源](https://zhuanlan.zhihu.com/p/61228593)，再执行以下命令在WSL中安装了编译器套件（[关于Linux下修改文件内容的操作](https://zhuanlan.zhihu.com/p/113246292))
+
+```
+# 安装C语言编译器
+sudo apt-get install gcc
+# 安装C++编译器
+sudo apt-get install g++
+```
+
+> gcc 最开始的时候是 GNU C Compiler, 就是一个c编译器。但是后来因为这个项目里边集成了更多其他不同语言的编译器，GCC就代表 the GNU Compiler Collection，所以表示一堆编译器的合集。GCC已经不是当初那个c语言编译器了，更确切的说他是一个驱动程序，根据代码的后缀名来判断调用c编译器还是c++编译器 (g++)。比如你的代码后缀是*.c，他会调用c编译器还有linker去链接c的library。如果你的代码后缀是cpp, 他会调用g++编译器，当然library call也是c++版本的。
+>
+> 简单来将把gcc当成c语言编译器，g++当成c++语言编译器用就是了。
+
+* 在VSCode中安装两个插件，这样不用配置tasks.json和luanch.json文件就可以很方便的编译并运行源代码文件
+
+![image-20210126102445706](https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/image-20210126102445706.png)
 
 ## 设置
 

@@ -4,7 +4,7 @@ date: 2019-10-28 10:12:17
 index_img: /img/post_index_img/python.jpg
 tags: 
 - Python
-- VsCode
+- VS Code
 categories: 技术
 ---
 
@@ -130,7 +130,13 @@ jupyter kernelspec remove 虚拟环境名称
 
 ![](https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/jupyterlab_env.png)
 
+如果是要结合virtualenv创建的虚拟环境，参考[这篇文章](https://blog.csdn.net/weixin_40539892/article/details/80940885)
 
+
+
+## 插件安装
+
+[15个好用到爆炸的Jupyter Lab插件](https://zhuanlan.zhihu.com/p/101070029)
 
 # 深度学习平台的配置
 

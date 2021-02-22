@@ -1,17 +1,13 @@
 ---
-title: '[论文阅读01]Neurosurgeon：Collaborative Intelligence Between the Cloud and Mobile Edge'
+title: '[论文阅读01] Neurosurgeon：Collaborative Intelligence Between the Cloud and Mobile Edge'
 date: 2019-12-16 15:04:09
 tags:
 - 边缘计算
 categories:
-- 文献阅读
+- 论文阅读
 ---
 
-> [《Neurosurgeon: Collaborative Intelligence Between the Cloud and Mobile Edge》](https://web.eecs.umich.edu/~jahausw/publications/kang2017neurosurgeon.pdf)
->
-> **Neurosurgeon：一种云和移动边缘之间的联合智能系统**
->
-> 论文出处：2017 **ASPLO** (Architectural Support for Programming Languages and Operating Systems)，是计算机体系结构的顶级学术会议。
+> 论文出处：2017 **ASPLO** (Architectural Support for Programming Languages and Operating Systems)会议，是计算机体系结构方向的顶级学术会议，[《Neurosurgeon: Collaborative Intelligence Between the Cloud and Mobile Edge》](https://web.eecs.umich.edu/~jahausw/publications/kang2017neurosurgeon.pdf)
 
 
 

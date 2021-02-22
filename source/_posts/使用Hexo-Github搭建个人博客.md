@@ -535,5 +535,5 @@ npm install hexo-deployer-git --save
 
 # 绑定域名
 
-待补充……
+https://blog.csdn.net/qq_29232943/article/details/52786603
 

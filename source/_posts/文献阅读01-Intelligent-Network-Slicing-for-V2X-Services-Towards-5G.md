@@ -1,11 +1,12 @@
 ---
-title: '[文献阅读02]Intelligent Network Slicing for V2X Services Towards 5G'
+title: '[论文阅读02]Intelligent Network Slicing for V2X Services Towards 5G'
 date: 2020-08-11 11:00:55
 tags: V2X
-categories: 文献阅读
+categories:
+- 论文阅读
 ---
 
-**点击可获取原文：**[*《Intelligent Network Slicing for V2X Services Towards 5G》*](https://arxiv.org/abs/1910.01516)*（IEEE Network 2019，中科院SCI期刊分区 Q1，北邮的研究团队）*
+> 论文出处：[*《Intelligent Network Slicing for V2X Services Towards 5G》*](https://arxiv.org/abs/1910.01516)*（IEEE Network 2019，中科院SCI期刊分区 Q1，来自北邮的研究团队）*
 
 ## Abstract
 
