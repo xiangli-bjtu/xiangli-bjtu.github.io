@@ -221,9 +221,7 @@
             
             <div class="markdown-body" id="post-body">
               <h1 id="信息存储"><a href="#信息存储" class="headerlink" title="信息存储"></a>信息存储</h1><h2 id="字节、计算机进制"><a href="#字节、计算机进制" class="headerlink" title="字节、计算机进制"></a>字节、计算机进制</h2><p>现代计算机是采取二进制来表示信息的，一个0-1状态为一个<strong>比特</strong>。更为实用的单位是连续8位的块即一个<strong>字节</strong>。计算机程序将内存视为一个非常大的字节数组，内存中的每个字节由一个唯一的数字表示，称为它的<strong>地址</strong>。所有地址的集合称为<strong>虚拟地址空间</strong></p>
-<p>信息采取0-1bit的比特串来表示是很麻烦的，更为通用的表示是采取<strong>16进制</strong>。2进制、10进制以及16进制的转换关系如下：</p>
-<img src="C:\Users\XiangLi\Documents\xiangli-bjtu.github.io\source\_posts\《CSAPP》读书笔记（2）：信息的表示和处理\Hex.png" srcset="/img/loading.gif" style="zoom:67%;" />
-
+<p>信息采取0-1bit的比特串来表示是很麻烦的，更为通用的表示是采取<strong>16进制</strong>。</p>
 <p>对于较大数值的进制转化可以借助软件工具来实现（如系统自带的科学计算器）</p>
 <h2 id="字长"><a href="#字长" class="headerlink" title="字长"></a>字长</h2><p>每台计算机都有一个字长，也就是平常所谓的32位、64位机器。它决定着<strong>虚拟地址空间的大小（虚拟内存的字节总数）</strong>，对于字长为$W$的计算机，其虚拟地址范围为：$0~2^W-1$</p>
 <p>对于程序是“32位程序”或“64位程序”，<strong>针对该程序是如何编译的</strong>，而不是运行机器的类型。</p>
