@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      17
        分钟
     </span>
   
@@ -226,9 +226,7 @@
 <li>无线通信的环境是开放的，所有用户传输的信号都处在同一个环境下，会造成对别的用户的干扰</li>
 </ol>
 <p>电磁波作为传输载体，存在着多种的传播方式：直射、散射、反射、绕射等，这些都会对信号的强度造成影响。无线信号的衰减方式主要可分为：</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/wireless fading.png" srcset="/img/loading.gif" style="zoom:80%;" />
-
-
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/wireless%20fading.png" srcset="/img/loading.gif"></p>
 <ul>
 <li>大尺度衰落：<ul>
 <li>自然衰减（路径损耗）：一般可认为信号功率与传输距离呈现$1/r^2$关系衰减（自由空间或者近距离），或者与距离呈指数递减关系：$r^{\alpha}$（实际的传输环境）</li>
@@ -242,9 +240,9 @@
 </li>
 </ul>
 <p>大尺度、小尺度是针对移动程度来说的。一般来讲，小尺度在很短的移动距离内（可认为与信号的波长相当），而大尺度衰落随移动变化较为缓慢，一般通过中继放大器、直放站、室内分布系统等来补偿衰落。</p>
-<p>![](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/various">https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/various</a> fading.JPG)</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/various%20fading.JPG" srcset="/img/loading.gif"></p>
 <h1 id="时延扩展与相干带宽"><a href="#时延扩展与相干带宽" class="headerlink" title="时延扩展与相干带宽"></a>时延扩展与相干带宽</h1><p>由于多径传输的原因，假如在发送端发送一个窄的脉冲信号，在接收端会接收多个脉冲，本来最短时延是沿最短路径传输所消耗的时间，现在因为多条路径长短不一，所以时延被扩展了，这也称为信道的**时间弥散性（time dispersion)**。通常将最后一个到达的脉冲，和最先到达的脉冲的时延差，称为最大时延扩展，用$\tau_{max}$来表示。</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/time spread.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<center><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/time%20spread.png" srcset="/img/loading.gif" style="zoom: 67%;" /></center>
 
 <ul>
 <li><p>从时域上看，如果这个时延扩展大于两个发送脉冲之间的时间间隔，则会对下一个脉冲的接收产生干扰。，造成符号间干扰即码间串扰 **Inter Symbol Interference，ISI)**，</p>
@@ -257,16 +255,16 @@
 </li>
 </ul>
 <h1 id="多普勒扩展与相干时间"><a href="#多普勒扩展与相干时间" class="headerlink" title="多普勒扩展与相干时间"></a>多普勒扩展与相干时间</h1><p>多普勒频移的计算公式如下，其 中$f_c$表示载波频率， $c$表示光速，$f_m$ 表示最大多普勒频移， $v$表示移动台的运动速度，$\theta$表示信号到达角（物体前进方向与信号到达方向的夹角）。</p>
-<p>![](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/doppler">https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/doppler</a> shift.png)</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/doppler%20shift.png" srcset="/img/loading.gif"></p>
 <p>由于多普勒频移，导致了一频率信号经过时变衰落信道之后会呈现为具有一定带宽和频率包络的信号，见下图。这又可以称为信道的<strong>频率弥散性(frequency dispersion)</strong></p>
-<p>![](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/frequence">https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/frequence</a> dispersion.png)</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/frequence%20dispersion.png" srcset="/img/loading.gif"></p>
 <p><strong>相干时间</strong>被定义为：$T_c \approx1/f_d$，等于多普勒频移的倒数。它是指<strong>信道状态维持不变的时间</strong>，或者说信道的冲激响应维持不变的时间间隔。</p>
 <ul>
 <li>从时域上看，若<strong>符号的持续时长</strong>远大于信道的相干时间，多普勒扩展带宽内所对应信号的相位将发生很大的变化，导致在一个符号时间内接收端到达的同一信号的波形产生很大的变化，产生<strong>时间选择性衰落，也称为快衰落</strong>；否则，在此时间内接收信号的包络的相位变化将很小，信号的幅度变化也就很小，产生<strong>非时间选择性衰落，也称为慢衰落。</strong></li>
 <li>从频域上看，若信号带宽远小于多普勒扩展带宽，那由于频移使得相邻的频率分量之间相互干扰，造成<strong>载波间干扰（ICI）。</strong></li>
 </ul>
 <p>参考David Tse的《无线通信基础》：多普勒扩展对应的频率就是信号变化的包络，这个包络的周期即相干时间正比于就是多普勒扩展带宽的倒数。</p>
-<p>![](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david">https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david</a> tse.png)</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david%20tse.png" srcset="/img/loading.gif"></p>
 <ul>
 <li>应用：从发射分集的角度来理解：时间分集要求两次发射的时间要大于信道的相干时间，即如果发射时间小于信道的相干时间，则两次发射的信号衰落特性完全相似，会被接收端认为是同一个信号。分集抗衰落的作用就不存在了。</li>
 </ul>
