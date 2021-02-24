@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      22
        分钟
     </span>
   
@@ -231,54 +231,43 @@
 <p>关于蒙特卡罗的例子可以看看这个视频（给了5个案例）：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=XRGquU0ZJok">蒙特卡罗 Monte Carlo</a></p>
 <h2 id="蒙特卡罗强化学习"><a href="#蒙特卡罗强化学习" class="headerlink" title="蒙特卡罗强化学习"></a>蒙特卡罗强化学习</h2><p>蒙特卡洛强化学习指：指在不清楚MDP具体细节的情况下，直接基于某个策略从某个状态开始，让个体与环境交互经历完整的状态序列 (episode) ，某状态的价值等于在多个状态序列中以该状态算得到的所有return 的平均。这里所谓<strong>完整的状态序列 (complete episode)**并不要求起始状态一定是某一个特定的状态，但是要求个体最终进入环境认可的某一个终止状态。从这里也能看出MC的局限性在于</strong>要求MDP过程存在终止状态**</p>
 <p><strong>Monte-Carlo Policy Evaluation 的流程</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.1.JPG" srcset="/img/loading.gif" style="zoom:67%;" />
-
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.1.JPG" srcset="/img/loading.gif"></p>
 <p>可以看出，预测问题的求解思路还是很简单的。核心思想就是<strong>用平均收获值代替价值（value = empirical mean return）</strong>，理论上Episode越多，结果越准确。不过有几个点可以优化考虑：</p>
 <ul>
 <li>第一个考虑的点在于：同样一个状态可能在一个完整的状态序列中重复出现，那么该状态的收获该如何计算？</li>
 </ul>
 <p>一种办法是仅把状态序列中第一次出现该状态时的收获值纳入到收获平均值的计算中，这被称为 Fist-Visit Monte-Carlo Policy Evaluation</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.2.JPG" srcset="/img/loading.gif" style="zoom:80%;" />
-
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.2.JPG" srcset="/img/loading.gif"></p>
 <p>另一种是针对一个状态序列中每次出现的该状态，都计算对应的收获值并纳入到收获平均值的计算中，这被称为 Every-Visit Monte-Carlo Policy</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.3.JPG" srcset="/img/loading.gif" style="zoom:80%;" />
-
-<p>第二种方法比第一种的计算量要大一些，但是在完整的经历样本序列少的场景下会比第一种方法适用。</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.3.JPG" srcset="/img/loading.gif"></p>
+<p><strong>第二种方法比第一种的计算量要大一些，但是在完整的经历样本序列少的场景下会比第一种方法适用。</strong></p>
 <ul>
 <li>另一个需要考虑的点在于：上面预测问题的求解公式里，我们有一个average的公式，意味着要保存所有该状态的收获值之和最后取平均。这样浪费了太多的存储空间。一个较好的方法是empirical mean的更新可以被写成Incremental Mean的方式，在实际操作时更新平均收获时，不需要存储所有既往收获，而是每得到一次收获，就计算其平均收获。</li>
 </ul>
 <p>通过下面的公式可以更好的理解（相当于在上一次数值的基础上，加上一个带学习率的残差进行更新）：</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.4.JPG" srcset="/img/loading.gif" style="zoom:67%;" />
-
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.4.JPG" srcset="/img/loading.gif"></p>
 <p>把这个方法应用于蒙特卡洛策略评估，就得到下面的蒙特卡洛累进更新。在处理非静态问题时，使用这个方法跟踪一个实时更新的平均值是非常有用的，还可以引入参数 $\alpha$ 每得到一轮episode后更新状态价值的速度：</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.5.JPG" srcset="/img/loading.gif" style="zoom:80%;" />
-
-<p>以上就是蒙特卡洛学习方法的主要思想和描述，蒙特卡洛学习方法实际应用并不多。接下来着重介绍实际常用的TD学习方法。</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.5.JPG" srcset="/img/loading.gif"></p>
+<p>以上就是蒙特卡洛学习方法的主要思想和描述，<em>蒙特卡洛学习方法实际应用并不多</em>。接下来着重介绍实际常用的TD学习方法。</p>
 <h1 id="Temporal-Difference-Learning"><a href="#Temporal-Difference-Learning" class="headerlink" title="Temporal-Difference Learning"></a>Temporal-Difference Learning</h1><h2 id="TD算法流程"><a href="#TD算法流程" class="headerlink" title="TD算法流程"></a>TD算法流程</h2><p>时序差分学习简称TD学习，它的特点如下：和蒙特卡洛学习一样，它也从Episode学习，不需要了解模型本身；但是它可以学习<strong>不完整</strong>的Episode，通过<strong>自举（bootstrapping）</strong>，猜测Episode的结果，同时持续更新这个猜测。</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.6.JPG" srcset="/img/loading.gif" style="zoom:80%;" />
-
-<p>所谓bootstrapping，就是TD算法在估计某一个状态的价值时，用到了以前估计的值，这里很类似Bellman方程的形式。图中TD target包括了模型对价值函数的预测值和环境的实际奖励，对于这个概念的理解可以参考这个视频（第二节） <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1BE411W7TA?p=2">https://www.bilibili.com/video/BV1BE411W7TA?p=2</a></p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.6.JPG" srcset="/img/loading.gif"></p>
+<p>所谓bootstrapping，就是TD算法在估计某一个状态的价值时，用到了以前估计的值，这里很类似Bellman方程的形式。图中TD target包括了模型对价值函数的预测值和环境的实际奖励，对于这个概念的理解可以参考<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1BE411W7TA?p=2">这个视频（第二节）</a></p>
 <h2 id="n-step-TD"><a href="#n-step-TD" class="headerlink" title="n-step TD"></a>n-step TD</h2><p>先前所介绍的TD算法实际上都是TD(0)算法，括号内的数字0表示的是在当前状态下往前多看1步，要是往前多看2步更新状态价值会怎样？这就引入了n-step的概念。</p>
 <p>对于n步时序差分来说，和普通的时序差分的区别就在于收获的计算方式的差异。那么既然有这个n步的说法，那么n到底是多少步好呢？如何衡量n的好坏呢？我们将在下一讲讨论。</p>
 <h2 id="MC与TD的对比"><a href="#MC与TD的对比" class="headerlink" title="MC与TD的对比"></a>MC与TD的对比</h2><p><strong>（1）</strong>TD 在知道最终结果之前可以学习，MC必须等到最终结果才能学习；TD 可以在没有终止状态时的持续进行的环境里学习。</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.8.JPG" srcset="/img/loading.gif" style="zoom:80%;" />
-
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.8.JPG" srcset="/img/loading.gif"></p>
 <p><strong>（2）</strong> 偏差/方差分析：这也很好理解，MC的方式会经历更为长时间的状态过程，MDP的随机性会对经验平均带来大的方差；而对于TD变换的主要原因在于的即时奖励，方差自然会小但是如果即使奖励不准确会使得对价值函数的估计出现偏差</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.9.JPG" srcset="/img/loading.gif" style="zoom:80%;" />
-
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.9.JPG" srcset="/img/loading.gif"></p>
 <p><strong>（3）</strong> 通过比较可以看出，TD算法使用了MDP问题的马尔可夫属性，在Markov 环境下更有效；但是MC算法并不利用马尔可夫属性，通常在非Markov环境下更有效。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.10.JPG" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.10.JPG" srcset="/img/loading.gif"></p>
 <h1 id="三种强化学习算法对比"><a href="#三种强化学习算法对比" class="headerlink" title="三种强化学习算法对比"></a>三种强化学习算法对比</h1><p>Monte-Carlo, Temporal-Difference 和 Dynamic Programming 都是计算状态价值的一种方法，区别在于，前两种是在不知道Model的情况下的常用方法，这其中又以MC方法需要一个完整的Episode来更新状态价值，TD则不需要完整的Episode；DP方法则是基于Model（知道模型的运作方式）的计算状态价值的方法，它通过计算一个状态S所有可能的转移状态S’及其转移概率以及对应的即时奖励来计算这个状态S的价值。</p>
-<p>下面的几张图直观地体现了三种算法的区别：</p>
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.11.JPG" srcset="/img/loading.gif" style="zoom:67%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.12.JPG" srcset="/img/loading.gif" style="zoom:67%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.13.JPG" srcset="/img/loading.gif" style="zoom:67%;" />
-
+<p>下面的几张图直观地体现了三种算法运行流程的区别：</p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.11.JPG" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.12.JPG" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.13.JPG" srcset="/img/loading.gif"></p>
 <p><strong>关于是否Bootstrapping：</strong>MC 只使用实际收获；DP和TD使用了</p>
 <p><strong>关于是否用样本来计算:</strong> MC和TD都是应用样本来估计实际的价值函数；而DP则是利用模型直接计算得到实际价值函数，没有样本或采样之说。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.14.JPG" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.14.JPG" srcset="/img/loading.gif"></p>
 <p>从<strong>采样深度和广度</strong>两个维度来解释了四种算法的差别，多了一个穷举法。</p>
 <ul>
 <li>当使用单个采样，同时不走完整个Episode就是TD；</li>
@@ -286,7 +275,7 @@
 <li>当考虑全部样本可能性，但对每一个样本并不走完整个Episode时，就是DP；</li>
 <li>当既考虑所有Episode又把Episode从开始到终止遍历完，就变成了穷举法。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/xiangli-bjtu/Image-hosting-site/img/david_course4.15.JPG" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/xiangli-bjtu/Blog-images-hosting/main/img/david_course4.15.JPG" srcset="/img/loading.gif"></p>
 
             </div>
             <hr>
